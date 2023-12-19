@@ -1,6 +1,8 @@
 import sys
 
 from ips import patch as ips_patch
+from romWriter import RomWriter
+
 from typing import Union
 from pathlib import Path
 
@@ -20,9 +22,19 @@ def patch_rom_with_ips(ips_file_name: Union[str, Path], base_rom_file_name: Unio
 
 def main(argv: list[str]) -> None:
     rom_path = Path("roms/Super Junkoid 1.3.sfc")
-    
+
     if(not rom_path.is_file()):
         patch_rom_with_ips("Super Junkoid 1.3.ips","roms/Super Metroid (JU).sfc", rom_path)
+
+    rom_writer = RomWriter.fromFilePath(rom_path)
+
+    # change item into magic bolt in the room with a heart hidden behind a wall underwater
+    rom_writer.writeItem(0x7d2dc,b"\xdb\xee")
+
+    # change item into magic bolt(eye) in the rat cloak room
+    rom_writer.writeItem(0x7d2a4,b"\x2f\xef")
+
+    rom_writer.finalizeRom("roms/Super Junkoid 1.3(mod).sfc")
 
 if __name__ == "__main__":
     import time
