@@ -34,6 +34,13 @@ def main(argv: list[str]) -> None:
     # change item into magic bolt(eye) in the rat cloak room
     rom_writer.writeItem(0x7d2a4,b"\x2f\xef")
 
+    # change item with plm index 1
+    rom_writer.writeItem(0x7cd44, b"\xdb\xee")
+
+    # change item with alt locations
+    rom_writer.writeItem(0x79330,b"\xdb\xee")
+    rom_writer.writeItem(0x7ce08,b"\xdb\xee")
+
     rom_writer.finalizeRom("roms/Super Junkoid 1.3(mod).sfc")
 
 if __name__ == "__main__":
