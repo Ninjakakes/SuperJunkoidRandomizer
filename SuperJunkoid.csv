@@ -34,7 +34,7 @@ index,roomname,region,vanillaitemname,roomid,locationid,hiddenness,altlocationid
 32,Deep Magic Bolt,Deep Purple,Magic Bolt,0x787c5,0x79290,open,0
 33,Fake Map Heart,Deep Purple,Heart,0x787ec,0x792a0,open,0
 34,Crateria Heart,Deep Purple,Heart,0x7883a,0x7cdc2,open,0
-35,Gem Of Blood,Deep Purple,Gem Of Storms,0x7879e,0x7cc0a,eye,0
+35,Gem Of Storms,Deep Purple,Gem Of Storms,0x7879e,0x7cc0a,eye,0
 36,Magic Broom,Deep Purple,Magic Broom,0x78750,0x79288,eye,0
 37,Deep Purple Baseball Alter,Deep Purple,Baseball,0x78702,0x79300,open,0
 38,Lava Magic Bolt,Deep Purple,Magic Bolt,0x786db,0x7cc18,open,0

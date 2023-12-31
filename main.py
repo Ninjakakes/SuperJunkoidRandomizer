@@ -31,6 +31,19 @@ def patch_rom_with_ips(ips_file_name: Union[str, Path], base_rom_file_name: Unio
     with open(patched_rom_file_name,"wb") as patched_rom:
         patched_rom.write(patched_rom_data)
 
+def write_location(romWriter: RomWriter, location: Location) -> None:
+    """
+    provide a location with an ['item'] value
+    write all rom locations associated with the item location
+    """
+    item = location["item"]
+    assert item, f"{location['roomname']} didn't get an item"
+
+    plmid = plmidFromHiddenness(item, location["hiddenness"])
+    romWriter.writeItem(location["locationid"], plmid, item[4])
+    for address in location["altlocationids"]:
+        romWriter.writeItem(address, plmid, item[4])
+
 def main(argv: list[str]) -> None:
     rom_path = Path("roms/Super Junkoid 1.3.sfc")
 
@@ -39,38 +52,12 @@ def main(argv: list[str]) -> None:
 
     rom_writer = RomWriter.fromFilePath(rom_path)
 
-    location_data = pullCSV()
-    for name, loc in location_data.items():
-        address = loc["locationid"]
-        expected_item_data = plmidFromHiddenness(all_items[loc["vanillaitemname"]], loc["hiddenness"])
-        item_data = rom_writer.rom_data[address:address+2]
-        if(expected_item_data == item_data):
-            print(f"Index: {loc['index']} has the expected item of {loc['vanillaitemname']}")
-        else:
-            print(f"Index: {loc['index']} has an unepected item (Expected: {expected_item_data} Got: {item_data})")
-        if(loc["altlocationids"][0] != 0):
-            for address in loc["altlocationids"]:
-                expected_item_data = plmidFromHiddenness(all_items[loc["vanillaitemname"]], loc["hiddenness"])
-                item_data = rom_writer.rom_data[address:address+2]
-                if(expected_item_data == item_data):
-                    print(f"Index: {loc['index']} has the expected item of {loc['vanillaitemname']}")
-                else:
-                    print(f"Index: {loc['index']} has an unepected item (Expected: {expected_item_data}" 
-                          f"Got: {item_data})")
+    csvdict = pullCSV()
+    locArray = list(csvdict.values())
 
-
-    # change item into magic bolt in the room with a heart hidden behind a wall underwater
-    rom_writer.writeItem(0x7d2dc,plmidFromHiddenness(all_items["Magic Bolt"],'open'))
-
-    # change item into magic bolt(eye) in the rat cloak room
-    rom_writer.writeItem(0x7d2a4,plmidFromHiddenness(all_items["Magic Bolt"],'eye'))
-
-    # change item with plm index 1 (plm loc + (index*6))
-    rom_writer.writeItem(0x7cd44, plmidFromHiddenness(all_items["Magic Bolt"],'open'))
-
-    # change item with alt locations
-    rom_writer.writeItem(0x79330,plmidFromHiddenness(all_items["Magic Bolt"],'open'))
-    rom_writer.writeItem(0x7ce08,plmidFromHiddenness(all_items["Magic Bolt"],'open'))
+    for location in locArray:
+        location["item"] = all_items['Magic Bolt']
+        write_location(rom_writer, location)
 
     rom_writer.finalizeRom("roms/Super Junkoid 1.3(mod).sfc")
 
