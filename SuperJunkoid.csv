@@ -1,0 +1,70 @@
+index,roomname,region,vanillaitemname,roomid,locationid,hiddenness,altlocationids
+0,Hidden Rat Tunnel Magic Bolt,Outskirts,Magic Bolt,0x7be5f,0x79380,open,0
+1,Hidden Pipe Heart,Outskirts,Heart,0x78ea0,0x7cd30,open,0
+2,Pipe Maze Heart,Outskirts,Heart,0x7909b,0x7d4a4,open,0
+3,Ceiling Baseballs,Outskirts,Baseball,0x7ba7f,0x7d494,open,0
+4,Wall Jump Climb Magic Bolt,Outskirts,Magic Bolt,0x7bc2c,0x7c881,open,0
+5,Outskirts Baseball Alter,Outskirts,Baseball,0x78e52,0x7d51c,open,0
+6,Hidden Heart,Outskirts,Heart,0x78e2b,0x7ce5c,open,0
+7,Under Spider Magic Bolt,Outskirts,Magic Bolt,0x7915e,0x7d44c,open,0
+8,Hidden Underwater Heart,Outskirts,Heart,0x7bd9c,0x7d2dc,open,0
+9,Feather,Outskirts,Feather,0x78f63,0x7d454,eye,0
+10,Rat Cloak,Outskirts,Rat Cloak,0x782e5,0x7d2a4,eye,0
+11,Rat Burst,Outskirts,Rat Burst,0x78555,0x7d284,eye,0
+12,Outside Idol Sparksuit,Outskirts,Sparksuit,0x78507,0x7cdd8,open,0
+13,Wallkicks,Outskirts,Wallkicks,0x783a8,0x7d4e4,eye,0
+14,Left Shaft Heart,False Idol,Heart,0x79a21,0x7d30c,open,0
+15,Right Shaft Heart,False Idol,Heart,0x79c51,0x7d2e4,open,0
+16,Wave Bangle,Deep Purple,Wave Bangle,0x7b340,0x7cc6c,eye,0
+17,Left Idol Magic Bolt,False Idol,Magic Bolt,0x79c97,0x7d344,open,0
+18,Hidden Shaft Heart,False Idol,Heart,0x7b625,0x7cc3a,open,0
+19,Lower Idol Ceiling Magic Bolt,False Idol,Magic Bolt,0x7b5d7,0x7d4cc,open,0
+20,Under Alter Magic Bolt,False Idol,Magic Bolt,0x7b589,0x7c6fd,open,0
+21,First Sparksuit,False Idol,Sparksuit,0x7b562,0x7d4dc,eye,0
+22,False Idol Baseball Alter,False Idol,Baseball,0x7b3dc,0x7d394,open,0
+23,Spike Spark Heart,False Idol,Heart,0x7bdc3,0x7ce2c,open,0
+24,Junkoon Lucky Frog,False Idol,Lucky Frog,0x7ae60,0x7d314,open,0
+25,Purple Locket,False Idol,Purple Locket,0x79ec7,0x7d294,eye,0
+26,Upper Middle Idol Baseball,False Idol,Baseball,0x7adeb,0x7d4ec,open,0
+27,Upper Deep Purple Baseball,Deep Purple,Baseball,0x7a6d7,0x7bfd8,open,0
+28,Toxic Heart,Deep Purple,Heart,0x780c3,0x792b0,open,0
+29,Mother Brain Sparksuit,Deep Purple,Sparksuit,0x78666,0x7c519,open,0
+30,Under Stairs Magic Bolt,Deep Purple,Magic Bolt,0x785ca,0x7d57c,open,0
+31,Water Climb Heart,Deep Purple,Heart,0x78888,0x7c47d,open,0
+32,Deep Magic Bolt,Deep Purple,Magic Bolt,0x787c5,0x79290,open,0
+33,Fake Map Heart,Deep Purple,Heart,0x787ec,0x792a0,open,0
+34,Crateria Heart,Deep Purple,Heart,0x7883a,0x7cdc2,open,0
+35,Gem Of Blood,Deep Purple,Gem Of Storms,0x7879e,0x7cc0a,eye,0
+36,Magic Broom,Deep Purple,Magic Broom,0x78750,0x79288,eye,0
+37,Deep Purple Baseball Alter,Deep Purple,Baseball,0x78702,0x79300,open,0
+38,Lava Magic Bolt,Deep Purple,Magic Bolt,0x786db,0x7cc18,open,0
+39,Junkly Lucky Frog,Deep Purple,Lucky Frog,0x7a303,0x79360,open,0
+40,Behind Throne Heart,Ice Castle,Heart,0x78924,0x7ce3a,open,0
+41,Under Shaft Heart,Ice Castle,Heart,0x785a3,0x7c879,open,0
+42,Freeze Boost Heart,Ice Castle,Heart,0x78222,0x7cd44,open,0
+43,Spike Jump Magic Bolt,Ice Castle,Magic Bolt,0x781d4,0x7d32c,open,0
+44,Left Shaft Magic Bolt,Ice Castle,Magic Bolt,0x78138,0x7d354,open,0
+45,Crystal Cave Sparksuit,Ice Castle,Sparksuit,0x7809c,0x7c0cb,open,0
+46,Frozen Cave Baseball,Ice Castle,Baseball,0x789e7,0x7d41c,open,0
+47,Water Cave Magic Bolt,Ice Castle,Magic Bolt,0x7ad4f,0x7d484,open,0
+48,Snowmen Mini-Boss Heart,Ice Castle,Heart,0x7a461,0x79330,open,0x7ce08
+49,Rat Dasher,Ice Castle,Rat Dasher,0x7b2cb,0x7d404,eye,0
+50,Gem Of Ice,Ice Castle,Gem Of Ice,0x7b2a4,0x7d48c,eye,0
+51,Dreamer's Crown,Ice Castle,Dreamer's Crown,0x7b256,0x7d474,eye,0
+52,Ice Castle Baseball Alter,Ice Castle,Baseball,0x7b319,0x7cc7a,open,0
+53,Junkraid Lucky Frog,Ice Castle,Lucky Frog,0x7aefc,0x7d27c,open,0
+54,Under Corpses Heart,Blood Bethel,Heart,0x7b53b,0x7cd76,open,0
+55,Hidden Magic Bolt,Blood Bethel,Magic Bolt,0x7aed5,0x7cd22,open,0
+56,Shaft Heart,Blood Bethel,Heart,0x7b05b,0x7d3ac,open,0x7cbee
+57,Magic Soap,Blood Bethel,Magic Soap,0x78297,0x7ccb2,eye,0
+58,Lower Hidden Magic Bolt,Blood Bethel,Magic Bolt,0x7befb,0x7d2d4,open,0
+59,Behind Blocks Baseball,Blood Bethel,Baseball,0x7b964,0x7d2f4,open,0
+60,Cave Magic Bolt,Blood Bethel,Magic Bolt,0x78333,0x7ce16,open,0
+61,Gem Of Blood,Blood Bethel,Gem Of Blood,0x783cf,0x7d26c,eye,0
+62,Hidden Above Door Sparksuit,Blood Bethel,Sparksuit,0x7b403,0x7c267,open,0
+63,Hidden Table Heart,Blood Bethel,Heart,0x7841d,0x7cd98,open,0
+64,Sanguine Fin,Blood Bethel,Sanguine Fin,0x78492,0x7d4f4,eye,0
+65,OatsnGoats Heart,Blood Bethel,Heart,0x7857c,0x7bf9a,open,0
+66,Blood Bethel Baseball Alter,Blood Bethel,Baseball,0x7b2be,0x7ccce,open,0
+67,Junkgon Lucky Frog,Blood Bethel,Lucky Frog,0x78444,0x7d43c,open,0
+68,Gem Of Death,Sheol,Gem Of Death,0x7ae39,0x79350,eye,0
