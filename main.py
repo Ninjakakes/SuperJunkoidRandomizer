@@ -1,9 +1,13 @@
+import random
 import sys
 
 from ips import patch as ips_patch
 from romWriter import RomWriter
 from location import Location, pullCSV
 from item import all_items
+from loadout import Loadout
+from game import Game
+import fillAssumed
 
 from typing import Union
 from pathlib import Path
@@ -45,21 +49,81 @@ def write_location(romWriter: RomWriter, location: Location) -> None:
         romWriter.writeItem(address, plmid, item[4])
 
 def main(argv: list[str]) -> None:
-    rom_path = Path("roms/Super Junkoid 1.3.sfc")
+    game = generate()
+    rom_name = write_rom(game)
 
-    if(not rom_path.is_file()):
-        patch_rom_with_ips("Super Junkoid 1.3.ips","roms/Super Metroid (JU).sfc", rom_path)
-
-    rom_writer = RomWriter.fromFilePath(rom_path)
+def generate() -> Game:
+    seed = random.randint(0, 9999999)
+    # seed = 0
+    random.seed(seed)
 
     csvdict = pullCSV()
     locArray = list(csvdict.values())
 
-    for location in locArray:
-        location["item"] = all_items['Magic Bolt']
-        write_location(rom_writer, location)
+    game = Game(csvdict,seed)
 
-    rom_writer.finalizeRom("roms/Super Junkoid 1.3(mod).sfc")
+    seedComplete = False
+    randomizeAttempts = 0
+    while not seedComplete:
+        randomizeAttempts += 1
+        if randomizeAttempts > 10:
+            print("Giving up after 10 attempts. Help?")
+            break
+        print("Starting randomization attempt:", randomizeAttempts)
+        game.item_placement_spoiler = ""
+        game.item_placement_spoiler += f"Starting randomization attempt: {randomizeAttempts}\n"
+        game.item_placement_spoiler += f"Seed: {seed}"
+        # now start randomizing
+        seedComplete = assumed_fill(game)
+
+    return game
+
+def assumed_fill(game: Game) -> bool:
+    for loc in game.all_locations.values():
+        loc["item"] = None
+    dummy_locations: list[Location] = []
+    loadout = Loadout(game)
+    fill_algorithm = fillAssumed.FillAssumed()
+    n_items_to_place = fill_algorithm.count_items_remaining()
+    assert n_items_to_place <= len(game.all_locations), \
+        f"{n_items_to_place} items to put in {len(game.all_locations)} locations"
+    print(f"{fill_algorithm.count_items_remaining()} items to place")
+    while fill_algorithm.count_items_remaining():
+        placePair = fill_algorithm.choose_placement(dummy_locations, loadout)
+        if placePair is None:
+            message = ('Item placement was not successful in assumed. '
+                       f'{fill_algorithm.count_items_remaining()} items remaining.')
+            print(message)
+
+            break
+        placeLocation, placeItem = placePair
+        placeLocation["item"] = placeItem
+        print(f"Placing {placeItem[0]} at {placeLocation['index']}:" 
+              f"{placeLocation['region']} | {placeLocation['roomname']}")
+
+        if fill_algorithm.count_items_remaining() == 0:
+            completable = True
+            if completable:
+                print("Item placements successful.")
+            return completable
+
+    return False
+
+def write_rom(game: Game) -> str:
+    rom_name = f"SuperJunkoid{game.seed}.sfc"
+    rom1_path = f"roms/{rom_name}"
+    rom_clean_path = Path("roms/Super Junkoid 1.3.sfc")
+
+    if(not rom_clean_path.is_file()):
+        patch_rom_with_ips("Super Junkoid 1.3.ips","roms/Super Metroid (JU).sfc", rom_clean_path)
+
+    romWriter = RomWriter.fromFilePath(rom_clean_path)
+
+    for loc in game.all_locations.values():
+        write_location(romWriter, loc)
+
+    romWriter.finalizeRom(rom1_path)
+
 
 if __name__ == "__main__":
     import time
