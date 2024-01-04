@@ -5,6 +5,7 @@ from fillInterface import FillAlgorithm
 from item import Item, Items
 from loadout import Loadout
 from location import Location
+from solver import solve
 
 _minor_items = {
     Items.MagicBolt: 14,
@@ -50,7 +51,7 @@ class FillAssumed(FillAlgorithm):
         self.itemLists = [self.prog_items, self.extra_items]
 
     def _get_accessible_locations(self, loadout: Loadout) -> list[Location]:
-        locs = list(loadout.game.all_locations.values())
+        _, _, locs = solve(loadout.game, loadout)
         return locs
 
     def _get_available_locations(self, loadout: Loadout) -> list[Location]:

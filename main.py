@@ -7,6 +7,8 @@ from location import Location, pullCSV
 from item import all_items
 from loadout import Loadout
 from game import Game
+from solver import solve
+from defaultLogic import Default
 import fillAssumed
 
 from typing import Union
@@ -51,6 +53,7 @@ def write_location(romWriter: RomWriter, location: Location) -> None:
 def main(argv: list[str]) -> None:
     game = generate()
     rom_name = write_rom(game)
+    write_spoiler_file(game, rom_name)
 
 def generate() -> Game:
     seed = random.randint(0, 9999999)
@@ -60,7 +63,7 @@ def generate() -> Game:
     csvdict = pullCSV()
     locArray = list(csvdict.values())
 
-    game = Game(csvdict,seed)
+    game = Game(Default,csvdict,seed)
 
     seedComplete = False
     randomizeAttempts = 0
@@ -98,8 +101,6 @@ def assumed_fill(game: Game) -> bool:
             break
         placeLocation, placeItem = placePair
         placeLocation["item"] = placeItem
-        print(f"Placing {placeItem[0]} at {placeLocation['index']}:" 
-              f"{placeLocation['region']} | {placeLocation['roomname']}")
 
         if fill_algorithm.count_items_remaining() == 0:
             completable = True
@@ -124,6 +125,31 @@ def write_rom(game: Game) -> str:
 
     romWriter.finalizeRom(rom1_path)
 
+    return rom_name
+
+def get_spoiler(game: Game) -> str:
+    """ the text in the spoiler file """
+
+    spoilerSave = game.item_placement_spoiler + '\n'
+
+    _completable, play_through, _locs = solve(game)
+
+    s = "\n Spoiler \n\n Spoiler \n\n Spoiler \n\n Spoiler \n\n"
+    s += spoilerSave
+    s += "\n\n"
+    for loc in game.all_locations.values():
+        s+= f"{loc['index']}: {loc['region']} | {loc['roomname']}: {loc['item'][0]}"+'\n'
+    s+="\n\n"
+    for solve_line in play_through:
+        s += solve_line + '\n'
+
+    return s
+
+def write_spoiler_file(game: Game, rom_name: str) -> None:
+    text = get_spoiler(game)
+    with open(f"spoilers/{rom_name}.spoiler.txt", "w") as spoiler_file:
+        spoiler_file.write(text)
+    print(f"Spoiler file is spoilers/{rom_name}.spoiler.txt")
 
 if __name__ == "__main__":
     import time

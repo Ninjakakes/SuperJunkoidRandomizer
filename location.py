@@ -12,7 +12,8 @@ class Location(TypedDict):
     locationid: int
     hiddenness: str
     altlocationids: list[int]
-    item: Item
+    item:  Optional[Item]
+    inlogic: bool
 
 def pullCSV() -> dict[str, Location]:
     csvdict: dict[str, Location] = {}
@@ -30,5 +31,6 @@ def pullCSV() -> dict[str, Location]:
             row['altlocationids'] = [
                 int(locstr, 16) for locstr in row['altlocationids'] if locstr != '']
             row['item'] = None
+            row['inlogic'] = False
             csvdict[row["roomname"]] = cast(Location, row)
     return csvdict
