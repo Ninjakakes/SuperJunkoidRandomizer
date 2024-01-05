@@ -14,8 +14,16 @@ canRatBurst = LogicShortcut(lambda loadout: (
 ))
 
 enterLowerOutskirts = LogicShortcut(lambda loadout: (
-    (RatCloak in loadout) and 
-    ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
+    ((RatCloak in loadout) and 
+    (
+        (Feather in loadout) or 
+        (Wallkicks in loadout) or
+        (MagicBroom in loadout)
+    )) or
+    ((Baseball in loadout) and
+        (((Feather in loadout) or (Wallkicks in loadout)) and (IceGem in loadout)) or
+        (MagicBroom in loadout)
+    )
 ))
 
 exitLowerOutskirts = LogicShortcut(lambda loadout: (
@@ -39,6 +47,7 @@ location_logic: LocationLogicType = {
     ),
     "Ceiling Baseballs": lambda loadout: (
         (lowerOutskirts in loadout) and
+        ((Wallkicks in loadout) or (MagicBroom in loadout)) and
         ((BloodGem in loadout) or (IceGem in loadout))
     ),
     "Wall Jump Climb Magic Bolt": lambda loadout: (
@@ -64,7 +73,8 @@ location_logic: LocationLogicType = {
         True
     ),
     "Rat Burst": lambda loadout: (
-        (lowerOutskirts in loadout)
+        (lowerOutskirts in loadout) and
+        (canRatBurst in loadout)
     ),
     "Outside Idol Sparksuit": lambda loadout: (
         (lowerOutskirts in loadout) and 
