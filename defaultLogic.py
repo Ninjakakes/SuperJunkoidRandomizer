@@ -9,30 +9,50 @@ from logic_shortcut import LogicShortcut
     MagicBolt, Baseball, Sparksuit, RatCloak, WaveBangle, RatBurst, Feather, PurpleLocket, SanguineFin, BloodGem, RatDasher, IceGem, DreamersCrown, StormsGem, Wallkicks, DeathGem, MagicBroom, Heart, LuckyFrog, MagicSoap
 ) = items_unpackable
 
+canRatBurst = LogicShortcut(lambda loadout: (
+    (RatCloak in loadout) and (RatBurst in loadout)
+))
+
+enterLowerOutskirts = LogicShortcut(lambda loadout: (
+    (RatCloak in loadout) and 
+    ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
+))
+
+exitLowerOutskirts = LogicShortcut(lambda loadout: (
+    (canRatBurst in loadout) or 
+    ((Baseball in loadout) and ((Wallkicks in loadout) or (MagicBroom in loadout)))
+))
+
+lowerOutskirts = LogicShortcut(lambda loadout: (
+    ((enterLowerOutskirts in loadout) and (exitLowerOutskirts in loadout))
+))
+
 location_logic: LocationLogicType = {
     "Hidden Rat Tunnel Magic Bolt": lambda loadout: (
-        True
+        (RatCloak in loadout)
     ),
     "Hidden Pipe Heart": lambda loadout: (
-        True
+        (canRatBurst in loadout)
     ),
     "Pipe Maze Heart": lambda loadout: (
-        True
+        (RatCloak in loadout)
     ),
     "Ceiling Baseballs": lambda loadout: (
-        True
+        (lowerOutskirts in loadout) and
+        ((BloodGem in loadout) or (IceGem in loadout))
     ),
     "Wall Jump Climb Magic Bolt": lambda loadout: (
-        True
+        (lowerOutskirts in loadout) and 
+        ((Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Outskirts Baseball Alter": lambda loadout: (
-        True
+        (Baseball in loadout)
     ),
     "Hidden Heart": lambda loadout: (
-        True
+        (RatCloak in loadout)
     ),
     "Under Spider Magic Bolt": lambda loadout: (
-        True
+        (canRatBurst in loadout)
     ),
     "Hidden Underwater Heart": lambda loadout: (
         True
@@ -44,13 +64,15 @@ location_logic: LocationLogicType = {
         True
     ),
     "Rat Burst": lambda loadout: (
-        True
+        (lowerOutskirts in loadout)
     ),
     "Outside Idol Sparksuit": lambda loadout: (
-        True
+        (lowerOutskirts in loadout) and 
+        (Sparksuit in loadout)
     ),
     "Wallkicks": lambda loadout: (
-        True
+        (lowerOutskirts in loadout) and 
+        ((Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Left Shaft Heart": lambda loadout: (
         True
