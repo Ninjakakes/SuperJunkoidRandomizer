@@ -43,7 +43,7 @@ index,roomname,region,vanillaitemname,roomid,locationid,hiddenness,altlocationid
 41,Under Shaft Heart,Ice Castle,Heart,0x785a3,0x7c879,open,0
 42,Freeze Boost Heart,Ice Castle,Heart,0x78222,0x7cd44,open,0
 43,Spike Jump Magic Bolt,Ice Castle,Magic Bolt,0x781d4,0x7d32c,open,0
-44,Left Shaft Magic Bolt,Ice Castle,Magic Bolt,0x78138,0x7d354,open,0
+44,Right Shaft Magic Bolt,Ice Castle,Magic Bolt,0x78138,0x7d354,open,0
 45,Crystal Cave Sparksuit,Ice Castle,Sparksuit,0x7809c,0x7c0cb,open,0
 46,Frozen Cave Baseball,Ice Castle,Baseball,0x789e7,0x7d41c,open,0
 47,Water Cave Magic Bolt,Ice Castle,Magic Bolt,0x7ad4f,0x7d484,open,0
