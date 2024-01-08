@@ -56,6 +56,21 @@ junkraid = LogicShortcut(lambda loadout: (
     (crocomire in loadout) and (loadout.count(Heart) >= 4)
 ))
 
+bloodBethel = LogicShortcut(lambda loadout: (
+    ((canRatBurst in loadout) and (Feather in loadout)) and
+    ((Wallkicks in loadout) or (MagicBroom in loadout) or (SanguineFin in loadout)) 
+))
+
+botwoon = LogicShortcut(lambda loadout: (
+    (bloodBethel in loadout) and (SanguineFin in loadout) and
+    ((Wallkicks in loadout) or (MagicBroom in loadout)) and
+    (Baseball in loadout) and (loadout.count(Heart) >= 8)
+))
+
+junkgon = LogicShortcut(lambda loadout: (
+    (botwoon in loadout) and (BloodGem in loadout) and (loadout.count(MagicBolt) >=4 )
+))
+
 location_logic: LocationLogicType = {
     "Hidden Rat Tunnel Magic Bolt": lambda loadout: (
         (RatCloak in loadout)
@@ -255,50 +270,54 @@ location_logic: LocationLogicType = {
     "Junkraid Lucky Frog": lambda loadout: (
         (junkraid in loadout)
     ),
-    "Under Corpses Heart": lambda loadout: (
-        True
+    "Under Corpses Heart": lambda loadout: ( # Start Of Blood Bethel
+        (bloodBethel in loadout)
     ),
     "Hidden Magic Bolt": lambda loadout: (
-        True
+        (bloodBethel in loadout)
     ),
     "Shaft Heart": lambda loadout: (
-        True
+        (bloodBethel in loadout)
     ),
     "Magic Soap": lambda loadout: (
-        True
+        (bloodBethel in loadout) and
+        ((Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Lower Hidden Magic Bolt": lambda loadout: (
-        True
+        (bloodBethel in loadout)
     ),
     "Behind Blocks Baseball": lambda loadout: (
-        True
+        (bloodBethel in loadout) and (BloodGem in loadout)
     ),
     "Cave Magic Bolt": lambda loadout: (
-        True
+        (bloodBethel in loadout) and
+        ((canRatDash in loadout) or (Sparksuit in loadout))
     ),
     "Gem Of Blood": lambda loadout: (
-        True
+        (botwoon in loadout) and (BloodGem in loadout)
     ),
     "Hidden Above Door Sparksuit": lambda loadout: (
-        True
+        (bloodBethel in loadout) and (Sparksuit in loadout)
     ),
     "Hidden Table Heart": lambda loadout: (
-        True
+        (bloodBethel in loadout) and (SanguineFin in loadout) and
+        ((Wallkicks in loadout) or (MagicBroom in loadout)) and
+        (Baseball in loadout)
     ),
     "Sanguine Fin": lambda loadout: (
-        True
+        (bloodBethel in loadout)
     ),
     "OatsnGoats Heart": lambda loadout: (
-        True
+        (bloodBethel in loadout) and (BloodGem in loadout)
     ),
     "Blood Bethel Baseball Alter": lambda loadout: (
-        True
+        (bloodBethel in loadout) and (Baseball in loadout)
     ),
     "Junkgon Lucky Frog": lambda loadout: (
-        True
+        (junkgon in loadout)
     ),
-    "Gem Of Death": lambda loadout: (
-        True
+    "Gem Of Death": lambda loadout: ( # SHEOL
+        (junkraid in loadout) and (junkgon in loadout)
     )
 }
 
