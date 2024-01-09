@@ -71,6 +71,15 @@ junkgon = LogicShortcut(lambda loadout: (
     (botwoon in loadout) and (BloodGem in loadout) and (loadout.count(MagicBolt) >=4 )
 ))
 
+enterIdol = LogicShortcut(lambda loadout:(
+    (junkraid in loadout) or ((junkgon in loadout) and (canRatDash in loadout))
+))
+
+sporeSpawn = LogicShortcut(lambda loadout:(
+    (enterIdol in loadout) and
+    ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
+))
+
 location_logic: LocationLogicType = {
     "Hidden Rat Tunnel Magic Bolt": lambda loadout: (
         (RatCloak in loadout)
@@ -121,10 +130,12 @@ location_logic: LocationLogicType = {
         ((Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Left Shaft Heart": lambda loadout: ( # TODO False Idol logic
-        True
+        (enterIdol in loadout) and
+        ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Right Shaft Heart": lambda loadout: (
-        True
+        (enterIdol in loadout) and
+        ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Wave Bangle": lambda loadout: ( # Deep Purple
         ((lowerOutskirts in loadout) or (lowerIcePalace in loadout)) and
@@ -132,34 +143,37 @@ location_logic: LocationLogicType = {
         ((RatCloak in loadout) or (WaveBangle in loadout))
     ),
     "Left Idol Magic Bolt": lambda loadout: (
-        True
+       (enterIdol in loadout) and
+        ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Hidden Shaft Heart": lambda loadout: (
-        True
+        (sporeSpawn in loadout) and
+        ((RatDasher in loadout) or (Sparksuit in loadout))
     ),
     "Lower Idol Ceiling Magic Bolt": lambda loadout: (
-        True
+        (sporeSpawn in loadout) and 
+        (((Feather in loadout) and (Wallkicks in loadout)) or (MagicBroom in loadout))
     ),
     "Under Alter Magic Bolt": lambda loadout: (
-        True
+        (sporeSpawn in loadout)
     ),
     "First Sparksuit": lambda loadout: (
-        True
+        (sporeSpawn in loadout) and (Sparksuit in loadout)
     ),
     "False Idol Baseball Alter": lambda loadout: (
-        True
+        (sporeSpawn in loadout)
     ),
     "Spike Spark Heart": lambda loadout: (
-        True
+        (sporeSpawn in loadout) and (SanguineFin in loadout) and (RatDasher in loadout) and (Sparksuit in loadout)
     ),
     "Junkoon Lucky Frog": lambda loadout: (
-        True
+        (sporeSpawn in loadout) and (SanguineFin in loadout) and (RatDasher in loadout) and (Sparksuit in loadout)
     ),
     "Purple Locket": lambda loadout: (
-        True
+        (sporeSpawn in loadout) and (SanguineFin in loadout) and (RatDasher in loadout) and (Sparksuit in loadout)
     ),
     "Upper Middle Idol Baseball": lambda loadout: (
-        True
+        (sporeSpawn in loadout)
     ),
     "Upper Deep Purple Baseball": lambda loadout: ( # Start of Deep Purple
         True
