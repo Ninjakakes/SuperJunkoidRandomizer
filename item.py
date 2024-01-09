@@ -109,10 +109,15 @@ class Items:
             b"\x63\xef",
             b"\xb7\xef",
             b"\x00")
+    BigLeaugeGlove = ("Big Leauge Glove",
+                      b"\xa0\xf4",
+                      b"\xa0\xf4",
+                      b"\xa0\xf4",
+                      b"\x00")
     
 items_unpackable: Iterable[Item] = (
     Items.MagicBolt, Items.Baseball, Items.Sparksuit, Items.RatCloak, Items.WaveBangle, Items.RatBurst, Items.Feather, Items.PurpleLocket, Items.SanguineFin, Items.BloodGem, Items.RatDasher, Items.IceGem, Items.DreamersCrown, 
-    Items.StormsGem, Items.Wallkicks, Items.DeathGem, Items.MagicBroom, Items.Heart, Items.LuckyFrog, Items.MagicSoap
+    Items.StormsGem, Items.Wallkicks, Items.DeathGem, Items.MagicBroom, Items.Heart, Items.LuckyFrog, Items.MagicSoap, Items.BigLeaugeGlove
 )
 
 all_items: dict[str, Item] = {

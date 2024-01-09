@@ -6,7 +6,7 @@ from logicInterface import LocationLogicType, LogicInterface
 from logic_shortcut import LogicShortcut
 
 (
-    MagicBolt, Baseball, Sparksuit, RatCloak, WaveBangle, RatBurst, Feather, PurpleLocket, SanguineFin, BloodGem, RatDasher, IceGem, DreamersCrown, StormsGem, Wallkicks, DeathGem, MagicBroom, Heart, LuckyFrog, MagicSoap
+    MagicBolt, Baseball, Sparksuit, RatCloak, WaveBangle, RatBurst, Feather, PurpleLocket, SanguineFin, BloodGem, RatDasher, IceGem, DreamersCrown, StormsGem, Wallkicks, DeathGem, MagicBroom, Heart, LuckyFrog, MagicSoap, BigLeagueGlove
 ) = items_unpackable
 
 canRatBurst = LogicShortcut(lambda loadout: (
@@ -78,6 +78,20 @@ enterIdol = LogicShortcut(lambda loadout:(
 sporeSpawn = LogicShortcut(lambda loadout:(
     (enterIdol in loadout) and
     ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
+))
+
+junkoon = LogicShortcut(lambda loadout: (
+    (sporeSpawn in loadout) and (SanguineFin in loadout) and (RatDasher in loadout) and (Sparksuit in loadout) and (loadout.count(Heart) >= 8)
+))
+
+deepPurple = LogicShortcut(lambda loadout:(
+    ((lowerOutskirts in loadout) and (Baseball in loadout)) or
+    ((lowerIcePalace in loadout) and (Baseball in loadout)) or
+    ((bloodBethel in loadout) and (Baseball in loadout))
+))
+
+crateria = LogicShortcut(lambda loadout:(
+    (deepPurple in loadout) and (canRatBurst in loadout) and (Sparksuit in loadout)
 ))
 
 location_logic: LocationLogicType = {
@@ -167,7 +181,7 @@ location_logic: LocationLogicType = {
         (sporeSpawn in loadout) and (SanguineFin in loadout) and (RatDasher in loadout) and (Sparksuit in loadout)
     ),
     "Junkoon Lucky Frog": lambda loadout: (
-        (sporeSpawn in loadout) and (SanguineFin in loadout) and (RatDasher in loadout) and (Sparksuit in loadout)
+        (junkoon in loadout)
     ),
     "Purple Locket": lambda loadout: (
         (sporeSpawn in loadout) and (SanguineFin in loadout) and (RatDasher in loadout) and (Sparksuit in loadout)
@@ -176,43 +190,44 @@ location_logic: LocationLogicType = {
         (sporeSpawn in loadout)
     ),
     "Upper Deep Purple Baseball": lambda loadout: ( # Start of Deep Purple
-        True
+        (deepPurple in loadout) and (canRatBurst in loadout) and (Sparksuit in loadout) and
+        ((Wallkicks in loadout) or (MagicBroom in loadout))
     ),
-    "Toxic Heart": lambda loadout: (
-        True
+    "Toxic Heart": lambda loadout: ( #TODO
+        (deepPurple in loadout)
     ),
     "Mother Brain Sparksuit": lambda loadout: (
-        True
+        (canRatBurst in loadout) and (Wallkicks in loadout) and (Feather in loadout)
     ),
     "Under Stairs Magic Bolt": lambda loadout: (
-        True
+        (deepPurple in loadout)
     ),
     "Water Climb Heart": lambda loadout: (
-        True
+        (deepPurple in loadout)
     ),
     "Deep Magic Bolt": lambda loadout: (
-        True
+        (deepPurple in loadout)
     ),
     "Fake Map Heart": lambda loadout: (
-        True
+        (deepPurple in loadout)
     ),
     "Crateria Heart": lambda loadout: (
-        True
+        (deepPurple in loadout)
     ),
     "Gem Of Storms": lambda loadout: (
-        True
+        (deepPurple in loadout)
     ),
     "Magic Broom": lambda loadout: (
-        True
+        (deepPurple in loadout)
     ),
     "Deep Purple Baseball Alter": lambda loadout: (
-        True
+        (deepPurple in loadout)
     ),
     "Lava Magic Bolt": lambda loadout: (
-        True
+        (deepPurple in loadout)
     ),
     "Junkly Lucky Frog": lambda loadout: (
-        True
+        (deepPurple in loadout)
     ),
     "Behind Throne Heart": lambda loadout: ( # Start Of Ice Palace
         (
@@ -332,6 +347,9 @@ location_logic: LocationLogicType = {
     ),
     "Gem Of Death": lambda loadout: ( # SHEOL
         (junkraid in loadout) and (junkgon in loadout)
+    ),
+    "Big Leauge Glove": lambda loadout: ( #TODO
+        (deepPurple in loadout)
     )
 }
 
