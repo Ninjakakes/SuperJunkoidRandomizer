@@ -94,6 +94,13 @@ crateria = LogicShortcut(lambda loadout:(
     (deepPurple in loadout) and (canRatBurst in loadout) and (Sparksuit in loadout)
 ))
 
+junkly = LogicShortcut(lambda loadout:(
+    (crateria in loadout) and
+    (((Feather in loadout) and Wallkicks in loadout) or (MagicBroom in loadout)) and 
+    (PurpleLocket in loadout) and
+    (loadout.count(Heart) >= 12) and (loadout.count(MagicBolt) >= 9) and (loadout.count(Baseball) >= 5)
+))
+
 location_logic: LocationLogicType = {
     "Hidden Rat Tunnel Magic Bolt": lambda loadout: (
         (RatCloak in loadout)
@@ -193,41 +200,59 @@ location_logic: LocationLogicType = {
         (deepPurple in loadout) and (canRatBurst in loadout) and (Sparksuit in loadout) and
         ((Wallkicks in loadout) or (MagicBroom in loadout))
     ),
-    "Toxic Heart": lambda loadout: ( #TODO
-        (deepPurple in loadout)
+    "Toxic Heart": lambda loadout: (
+        (crateria in loadout) and
+        (MagicBroom in loadout) and 
+        (PurpleLocket in loadout)
     ),
     "Mother Brain Sparksuit": lambda loadout: (
         (canRatBurst in loadout) and (Wallkicks in loadout) and (Feather in loadout)
     ),
     "Under Stairs Magic Bolt": lambda loadout: (
-        (deepPurple in loadout)
+        (crateria in loadout) and
+        (((Feather in loadout) and Wallkicks in loadout) or (MagicBroom in loadout)) and 
+        (PurpleLocket in loadout)
     ),
     "Water Climb Heart": lambda loadout: (
-        (deepPurple in loadout)
+        (crateria in loadout) and
+        ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Deep Magic Bolt": lambda loadout: (
-        (deepPurple in loadout)
+        (crateria in loadout) and
+        ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Fake Map Heart": lambda loadout: (
-        (deepPurple in loadout)
+        (crateria in loadout) and
+        ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Crateria Heart": lambda loadout: (
-        (deepPurple in loadout)
+        (crateria in loadout) and
+        ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Gem Of Storms": lambda loadout: (
-        (deepPurple in loadout)
+        (crateria in loadout) and
+        ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout)) and
+        (StormsGem in loadout) and
+        (loadout.count(Heart) >= 8) and (loadout.count(Heart) >= 5)
     ),
     "Magic Broom": lambda loadout: (
-        (deepPurple in loadout)
+        (crateria in loadout) and
+        (((Feather in loadout) and Wallkicks in loadout) or (MagicBroom in loadout)) and 
+        (PurpleLocket in loadout) and
+        (loadout.count(Heart) >= 8) and (loadout.count(MagicBolt) >= 5)
     ),
     "Deep Purple Baseball Alter": lambda loadout: (
-        (deepPurple in loadout)
+        (crateria in loadout) and
+        (((Feather in loadout) and Wallkicks in loadout) or (MagicBroom in loadout)) and 
+        (PurpleLocket in loadout)
     ),
     "Lava Magic Bolt": lambda loadout: (
-        (deepPurple in loadout)
+        (crateria in loadout) and
+        (((Feather in loadout) and Wallkicks in loadout) or (MagicBroom in loadout)) and 
+        (PurpleLocket in loadout)
     ),
     "Junkly Lucky Frog": lambda loadout: (
-        (deepPurple in loadout)
+        (junkly in loadout)
     ),
     "Behind Throne Heart": lambda loadout: ( # Start Of Ice Palace
         (
@@ -346,10 +371,13 @@ location_logic: LocationLogicType = {
         (junkgon in loadout)
     ),
     "Gem Of Death": lambda loadout: ( # SHEOL
-        (junkraid in loadout) and (junkgon in loadout)
+        (junkraid in loadout) and (junkgon in loadout) and (junkoon in loadout) and (junkly in loadout) and
+        (loadout.count(MagicBolt) >= 15)
     ),
-    "Big Leauge Glove": lambda loadout: ( #TODO
-        (deepPurple in loadout)
+    "Big Leauge Glove": lambda loadout: (
+        (crateria in loadout) and
+        (((Feather in loadout) and Wallkicks in loadout) or (MagicBroom in loadout)) and 
+        (PurpleLocket in loadout)
     )
 }
 

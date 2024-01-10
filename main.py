@@ -122,7 +122,7 @@ def write_rom(game: Game) -> str:
 
     for loc in game.all_locations.values():
         write_location(romWriter, loc)
-
+        
     romWriter.finalizeRom(rom1_path)
 
     return rom_name

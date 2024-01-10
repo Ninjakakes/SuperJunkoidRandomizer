@@ -23,7 +23,3 @@ For example, Gem of Ice cannot be at the vanilla Gem of Ice location, because it
 If you can't get out of a location, you shouldn't go in, because you might be soft-locked.
 
 Using Sparksuits to reach higher locations is not currently in logic
-
-## TODO
-- False Idol Logic
-- Deep Purple Logic
