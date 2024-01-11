@@ -106,10 +106,11 @@ location_logic: LocationLogicType = {
         (RatCloak in loadout)
     ),
     "Hidden Pipe Heart": lambda loadout: (
-        (canRatBurst in loadout)
+        (Wallkicks in loadout) or (MagicBroom in loadout) 
     ),
     "Pipe Maze Heart": lambda loadout: (
-        (RatCloak in loadout)
+        (RatCloak in loadout) and
+        ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Ceiling Baseballs": lambda loadout: (
         (lowerOutskirts in loadout) and
@@ -121,10 +122,11 @@ location_logic: LocationLogicType = {
         ((Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Outskirts Baseball Alter": lambda loadout: (
-        (Baseball in loadout)
+        (Baseball in loadout) and (RatCloak in loadout)
     ),
     "Hidden Heart": lambda loadout: (
-        (RatCloak in loadout)
+        (RatCloak in loadout) and
+        ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Under Spider Magic Bolt": lambda loadout: (
         (canRatBurst in loadout)
@@ -133,10 +135,10 @@ location_logic: LocationLogicType = {
         True
     ),
     "Feather": lambda loadout: (
-        True
+        (Feather in loadout)
     ),
     "Rat Cloak": lambda loadout: (
-        True
+        (Wallkicks in loadout) or (MagicBroom in loadout) or (RatCloak in loadout)
     ),
     "Rat Burst": lambda loadout: (
         (lowerOutskirts in loadout) and
@@ -302,11 +304,7 @@ location_logic: LocationLogicType = {
         ((SanguineFin in loadout) or (Wallkicks in loadout))
     ),
     "Snowmen Mini-Boss Heart": lambda loadout: (
-        (lowerIcePalace in loadout) and
-        (
-            (canRatBurst in loadout) or
-            (canRatDash in loadout) and (BloodGem in loadout)
-        )
+        (lowerIcePalace in loadout)
     ),
     "Rat Dasher": lambda loadout: (
         ((((Feather in loadout) or (Wallkicks in loadout)) and (IceGem in loadout)) or
