@@ -122,6 +122,10 @@ def write_rom(game: Game) -> str:
 
     for loc in game.all_locations.values():
         write_location(romWriter, loc)
+
+    # change values for chozo ball hearts and lucky frog to match the open variant
+    romWriter.writeBytes(0x026474, b"\x19")
+    romWriter.writeBytes(0x026909, b"\x32")
         
     romWriter.finalizeRom(rom1_path)
 

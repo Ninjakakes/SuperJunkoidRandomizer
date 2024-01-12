@@ -103,10 +103,11 @@ junkly = LogicShortcut(lambda loadout:(
 
 location_logic: LocationLogicType = {
     "Hidden Rat Tunnel Magic Bolt": lambda loadout: (
-        (RatCloak in loadout)
+        (RatCloak in loadout) and
+        ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Hidden Pipe Heart": lambda loadout: (
-        (Wallkicks in loadout) or (MagicBroom in loadout) 
+        (Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout) 
     ),
     "Pipe Maze Heart": lambda loadout: (
         (RatCloak in loadout) and
@@ -138,7 +139,8 @@ location_logic: LocationLogicType = {
         (Feather in loadout)
     ),
     "Rat Cloak": lambda loadout: (
-        (Wallkicks in loadout) or (MagicBroom in loadout) or (RatCloak in loadout)
+        (Wallkicks in loadout) or (MagicBroom in loadout) or
+        ((RatCloak in loadout) and (Feather in loadout))
     ),
     "Rat Burst": lambda loadout: (
         (lowerOutskirts in loadout) and
