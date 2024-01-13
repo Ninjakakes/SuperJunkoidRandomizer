@@ -25,7 +25,7 @@ enterLowerOutskirts = LogicShortcut(lambda loadout: (
         (MagicBroom in loadout)
     )) or
     ((Baseball in loadout) and
-        (lowerIcePalace in loadout)
+        (lowerIceCastle in loadout)
     )
 ))
 
@@ -38,7 +38,7 @@ lowerOutskirts = LogicShortcut(lambda loadout: (
     ((enterLowerOutskirts in loadout) and (exitLowerOutskirts in loadout))
 ))
 
-lowerIcePalace = LogicShortcut(lambda loadout: (
+lowerIceCastle = LogicShortcut(lambda loadout: (
     ((((Feather in loadout) or (Wallkicks in loadout)) and (IceGem in loadout)) or
     (MagicBroom in loadout)) or
     ((canRatBurst in loadout) and
@@ -48,7 +48,7 @@ lowerIcePalace = LogicShortcut(lambda loadout: (
 ))
 
 crocomire = LogicShortcut(lambda loadout: (
-    (lowerIcePalace in loadout) and (canRatBurst in loadout) and (loadout.count(MagicBolt) >= 4) and 
+    (lowerIceCastle in loadout) and (canRatBurst in loadout) and (loadout.count(MagicBolt) >= 4) and 
     (Baseball in loadout)
 ))
 
@@ -57,8 +57,7 @@ junkraid = LogicShortcut(lambda loadout: (
 ))
 
 bloodBethel = LogicShortcut(lambda loadout: (
-    ((canRatBurst in loadout) and (Feather in loadout)) and
-    ((Wallkicks in loadout) or (MagicBroom in loadout) or (SanguineFin in loadout)) 
+    (canRatBurst in loadout) and (Feather in loadout)
 ))
 
 botwoon = LogicShortcut(lambda loadout: (
@@ -86,7 +85,7 @@ junkoon = LogicShortcut(lambda loadout: (
 
 deepPurple = LogicShortcut(lambda loadout:(
     ((lowerOutskirts in loadout) and (Baseball in loadout)) or
-    ((lowerIcePalace in loadout) and (Baseball in loadout)) or
+    ((lowerIceCastle in loadout) and (Baseball in loadout)) or
     ((bloodBethel in loadout) and (Baseball in loadout))
 ))
 
@@ -123,20 +122,22 @@ location_logic: LocationLogicType = {
         ((Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Outskirts Baseball Alter": lambda loadout: (
-        (Baseball in loadout) and (RatCloak in loadout)
+        (Baseball in loadout) and (RatCloak in loadout) and
+        ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Hidden Heart": lambda loadout: (
         (RatCloak in loadout) and
         ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Under Spider Magic Bolt": lambda loadout: (
-        (canRatBurst in loadout)
+        (Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout)
     ),
     "Hidden Underwater Heart": lambda loadout: (
         True
     ),
     "Feather": lambda loadout: (
-        (Feather in loadout)
+        (Feather in loadout) or
+        ((SanguineFin in loadout) and ((Wallkicks in loadout) or (MagicBroom in loadout)))
     ),
     "Rat Cloak": lambda loadout: (
         (Wallkicks in loadout) or (MagicBroom in loadout) or
@@ -163,7 +164,7 @@ location_logic: LocationLogicType = {
         ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Wave Bangle": lambda loadout: ( # Deep Purple
-        ((lowerOutskirts in loadout) or (lowerIcePalace in loadout)) and
+        ((lowerOutskirts in loadout) or (lowerIceCastle in loadout)) and
         (Baseball in loadout) and
         ((RatCloak in loadout) or (WaveBangle in loadout))
     ),
@@ -258,7 +259,7 @@ location_logic: LocationLogicType = {
     "Junkly Lucky Frog": lambda loadout: (
         (junkly in loadout)
     ),
-    "Behind Throne Heart": lambda loadout: ( # Start Of Ice Palace
+    "Behind Throne Heart": lambda loadout: ( # Start Of Ice Castle
         (
             (((Feather in loadout) or (Wallkicks in loadout)) and (IceGem in loadout)) or
             (MagicBroom in loadout)
@@ -279,17 +280,17 @@ location_logic: LocationLogicType = {
     ),
     "Right Shaft Magic Bolt": lambda loadout: (
         (Baseball in loadout) and
-        (lowerIcePalace in loadout) and
+        (lowerIceCastle in loadout) and
         (RatCloak in loadout) and 
         ((Sparksuit in loadout) or (IceGem in loadout) or (MagicBroom in loadout))
     ),
     "Crystal Cave Sparksuit": lambda loadout: (
         (Sparksuit in loadout) and 
-        (lowerIcePalace in loadout) and
+        (lowerIceCastle in loadout) and
         (RatCloak in loadout)
     ),
     "Frozen Cave Baseball": lambda loadout: (
-        (lowerIcePalace in loadout) and
+        (lowerIceCastle in loadout) and
         (
             (canRatBurst in loadout) or
             (canRatDash in loadout) and (BloodGem in loadout)
@@ -297,16 +298,15 @@ location_logic: LocationLogicType = {
         ((Feather in loadout) and (IceGem in loadout)) or (MagicBroom in loadout)
     ),
     "Water Cave Magic Bolt": lambda loadout: (
-        (lowerIcePalace in loadout) and
+        (lowerIceCastle in loadout) and
         (
             (canRatBurst in loadout) or
             (canRatDash in loadout) and (BloodGem in loadout)
         ) and
-        (Feather in loadout) and
-        ((SanguineFin in loadout) or (Wallkicks in loadout))
+        (Feather in loadout) and (SanguineFin in loadout)
     ),
     "Snowmen Mini-Boss Heart": lambda loadout: (
-        (lowerIcePalace in loadout)
+        (lowerIceCastle in loadout)
     ),
     "Rat Dasher": lambda loadout: (
         ((((Feather in loadout) or (Wallkicks in loadout)) and (IceGem in loadout)) or
@@ -316,10 +316,10 @@ location_logic: LocationLogicType = {
         (crocomire in loadout) and (IceGem in loadout)
     ),
     "Dreamer's Crown": lambda loadout: (
-        (lowerIcePalace in loadout) and (Baseball in loadout) and (Sparksuit in loadout) and (canRatBurst in loadout)
+        (lowerIceCastle in loadout) and (Baseball in loadout) and (Sparksuit in loadout) and (canRatBurst in loadout)
     ),
     "Ice Castle Baseball Alter": lambda loadout: (
-        (lowerIcePalace in loadout) and (Baseball in loadout)
+        (lowerIceCastle in loadout) and (Baseball in loadout)
     ),
     "Junkraid Lucky Frog": lambda loadout: (
         (junkraid in loadout)
