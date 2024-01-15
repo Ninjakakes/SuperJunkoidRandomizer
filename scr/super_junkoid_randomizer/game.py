@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import Type
 
-from location import Location
-from logicInterface import LogicInterface
+from .location import Location
+from .logicInterface import LogicInterface
 
 @dataclass
 class Game:

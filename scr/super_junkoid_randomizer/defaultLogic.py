@@ -1,9 +1,9 @@
 from typing import ClassVar
 
-from item import items_unpackable, Items
-from loadout import Loadout
-from logicInterface import LocationLogicType, LogicInterface
-from logic_shortcut import LogicShortcut
+from .item import items_unpackable, Items
+from .loadout import Loadout
+from .logicInterface import LocationLogicType, LogicInterface
+from .logic_shortcut import LogicShortcut
 
 (
     MagicBolt, Baseball, Sparksuit, RatCloak, WaveBangle, RatBurst, Feather, PurpleLocket, SanguineFin, BloodGem,

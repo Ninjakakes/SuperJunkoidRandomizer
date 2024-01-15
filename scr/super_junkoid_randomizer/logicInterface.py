@@ -1,6 +1,6 @@
 from typing import Callable, ClassVar
 
-from loadout import Loadout
+from .loadout import Loadout
 
 LocationLogicType = dict[str, Callable[[Loadout], bool]]
 

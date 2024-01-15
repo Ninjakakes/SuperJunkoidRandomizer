@@ -1,9 +1,9 @@
 import abc
 from typing import Optional
 
-from item import Item
-from loadout import Loadout
-from location import Location
+from .item import Item
+from .loadout import Loadout
+from .location import Location
 
 class FillAlgorithm(abc.ABC):
     @abc.abstractmethod

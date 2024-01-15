@@ -1,10 +1,10 @@
 from typing import Optional
 
-from game import Game
-from item import Items
-from loadout import Loadout
-from location import Location
-from logic_updater import updateLogic
+from .game import Game
+from .item import Items
+from .loadout import Loadout
+from .location import Location
+from .logic_updater import updateLogic
 
 _progression_items = frozenset([
     Items.MagicBolt,

@@ -1,7 +1,8 @@
 import csv
+import pathlib
 from typing import Optional, TypedDict, cast
 
-from item import Item
+from .item import Item
 
 class Location(TypedDict):
     index: int
@@ -20,8 +21,9 @@ def pullCSV() -> dict[str, Location]:
 
     def commentfilter(line: str) -> bool:
         return (line[0] != '#')
-    
-    with open("SuperJunkoid.csv", 'r') as csvfile:
+
+    path = pathlib.Path(__file__).parent.resolve()
+    with open(path.joinpath("SuperJunkoid.csv"), 'r') as csvfile:
         reader = csv.DictReader(filter(commentfilter, csvfile))
         for row in reader:
             row['altlocationids'] = row['altlocationids'].split(',')

@@ -1,8 +1,8 @@
 from collections import Counter
 from typing import TYPE_CHECKING, Any, Iterable, Iterator, Optional, Union
 
-from item import Item
-from logic_shortcut import LogicShortcut
+from .item import Item
+from .logic_shortcut import LogicShortcut
 
 if TYPE_CHECKING:
     from game import Game

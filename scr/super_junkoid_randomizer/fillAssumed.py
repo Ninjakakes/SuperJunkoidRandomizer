@@ -1,11 +1,11 @@
 import random
 from typing import Optional
 
-from fillInterface import FillAlgorithm
-from item import Item, Items
-from loadout import Loadout
-from location import Location
-from solver import solve
+from .fillInterface import FillAlgorithm
+from .item import Item, Items
+from .loadout import Loadout
+from .location import Location
+from .solver import solve
 
 _minor_items = {
     Items.MagicBolt: 14,

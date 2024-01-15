@@ -1,15 +1,14 @@
 import random
 import sys
 
-from ips import patch as ips_patch
-from romWriter import RomWriter
-from location import Location, pullCSV
-from item import all_items
-from loadout import Loadout
-from game import Game
-from solver import solve
-from defaultLogic import Default
-import fillAssumed
+from super_junkoid_randomizer.ips import patch as ips_patch
+from super_junkoid_randomizer.romWriter import RomWriter
+from super_junkoid_randomizer.location import Location, pullCSV
+from super_junkoid_randomizer.loadout import Loadout
+from super_junkoid_randomizer.game import Game
+from super_junkoid_randomizer.solver import solve
+from super_junkoid_randomizer.defaultLogic import Default
+from super_junkoid_randomizer import fillAssumed
 
 from typing import Union
 from pathlib import Path
@@ -112,11 +111,11 @@ def assumed_fill(game: Game) -> bool:
 
 def write_rom(game: Game) -> str:
     rom_name = f"SuperJunkoid{game.seed}.sfc"
-    rom1_path = f"roms/{rom_name}"
-    rom_clean_path = Path("roms/Super Junkoid 1.3.sfc")
+    rom1_path = f"../roms/{rom_name}"
+    rom_clean_path = Path("../roms/Super Junkoid 1.3.sfc")
 
     if(not rom_clean_path.is_file()):
-        patch_rom_with_ips("Super Junkoid 1.3.ips","roms/Super Metroid (JU).sfc", rom_clean_path)
+        patch_rom_with_ips("super_junkoid_randomizer/Super Junkoid 1.3.ips", "../roms/Super Metroid (JU).sfc", rom_clean_path)
 
     romWriter = RomWriter.fromFilePath(rom_clean_path)
 
@@ -151,7 +150,7 @@ def get_spoiler(game: Game) -> str:
 
 def write_spoiler_file(game: Game, rom_name: str) -> None:
     text = get_spoiler(game)
-    with open(f"spoilers/{rom_name}.spoiler.txt", "w") as spoiler_file:
+    with open(f"../spoilers/{rom_name}.spoiler.txt", "w") as spoiler_file:
         spoiler_file.write(text)
     print(f"Spoiler file is spoilers/{rom_name}.spoiler.txt")
 
