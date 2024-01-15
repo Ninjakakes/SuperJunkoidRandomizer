@@ -1,3 +1,5 @@
+.idea
+
 *.spoiler.txt
 *.sfc
 __pycache__/
