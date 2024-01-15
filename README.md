@@ -16,6 +16,8 @@
 Run `main.py` from the command line
 
 ## Logic Notes
+It is extremely easy to softlock in the early game. The `Hidden Underwater Heart` is expected to be the first location visted
+
 All the logic is symmetrical. This means getting out is required to go in.
 
 For example, Gem of Ice cannot be at the vanilla Gem of Ice location, because it requires Gem of Ice to get out.
