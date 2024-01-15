@@ -42,7 +42,7 @@ class FillAssumed(FillAlgorithm):
             Items.Heart,
             Items.LuckyFrog,
             Items.MagicSoap,
-            Items.BigLeaugeGlove
+            Items.BigLeagueGlove
         ]
 
         self.extra_items = []
