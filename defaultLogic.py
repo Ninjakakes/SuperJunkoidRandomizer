@@ -6,7 +6,9 @@ from logicInterface import LocationLogicType, LogicInterface
 from logic_shortcut import LogicShortcut
 
 (
-    MagicBolt, Baseball, Sparksuit, RatCloak, WaveBangle, RatBurst, Feather, PurpleLocket, SanguineFin, BloodGem, RatDasher, IceGem, DreamersCrown, StormsGem, Wallkicks, DeathGem, MagicBroom, Heart, LuckyFrog, MagicSoap, BigLeagueGlove
+    MagicBolt, Baseball, Sparksuit, RatCloak, WaveBangle, RatBurst, Feather, PurpleLocket, SanguineFin, BloodGem,
+    RatDasher, IceGem, DreamersCrown, StormsGem, Wallkicks, DeathGem, MagicBroom, Heart, LuckyFrog, MagicSoap,
+    BigLeagueGlove
 ) = items_unpackable
 
 canRatBurst = LogicShortcut(lambda loadout: (
@@ -80,7 +82,8 @@ sporeSpawn = LogicShortcut(lambda loadout:(
 ))
 
 junkoon = LogicShortcut(lambda loadout: (
-    (sporeSpawn in loadout) and (SanguineFin in loadout) and (RatDasher in loadout) and (Sparksuit in loadout) and (loadout.count(Heart) >= 8)
+    (sporeSpawn in loadout) and (SanguineFin in loadout) and (RatDasher in loadout) and (Sparksuit in loadout)
+    and (loadout.count(Heart) >= 8)
 ))
 
 deepPurple = LogicShortcut(lambda loadout:(
@@ -106,7 +109,7 @@ location_logic: LocationLogicType = {
         ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Hidden Pipe Heart": lambda loadout: (
-        (Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout) 
+        True
     ),
     "Pipe Maze Heart": lambda loadout: (
         (RatCloak in loadout) and
@@ -133,7 +136,7 @@ location_logic: LocationLogicType = {
         (Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout)
     ),
     "Hidden Underwater Heart": lambda loadout: (
-        True
+        (Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout)
     ),
     "Feather": lambda loadout: (
         (Feather in loadout) or
@@ -155,7 +158,7 @@ location_logic: LocationLogicType = {
         (lowerOutskirts in loadout) and 
         ((Wallkicks in loadout) or (MagicBroom in loadout))
     ),
-    "Left Shaft Heart": lambda loadout: ( # TODO False Idol logic
+    "Left Shaft Heart": lambda loadout: (
         (enterIdol in loadout) and
         ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
