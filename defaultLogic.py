@@ -374,7 +374,7 @@ location_logic: LocationLogicType = {
         (junkraid in loadout) and (junkgon in loadout) and (junkoon in loadout) and (junkly in loadout) and
         (loadout.count(MagicBolt) >= 15)
     ),
-    "Big Leauge Glove": lambda loadout: (
+    "Big League Glove": lambda loadout: (
         (crateria in loadout) and
         (((Feather in loadout) and Wallkicks in loadout) or (MagicBroom in loadout)) and 
         (PurpleLocket in loadout)
