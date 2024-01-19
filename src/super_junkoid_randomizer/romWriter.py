@@ -46,6 +46,20 @@ class RomWriter:
         instance.romWriterType = RomWriterType.base64
         instance.rom_data = bytearray(base64.decodebytes(b64str.encode() if isinstance(b64str, str) else b64str))
         return instance
+
+    @staticmethod
+    def index_to_snes_addr(i: int) -> int:
+        """ converts a PC rom offset to a SNES lorom address """
+        a = ((i << 1) & 0x7f0000) + 0x800000
+        b = (i & 0x7fff) + 0x8000
+        snes = a | b
+        return snes
+
+    @staticmethod
+    def snes_to_index_addr(addr: int) -> int:
+        """ converts a SNES lorom address to a PC rom offset """
+        pc = ((addr & 0x7f0000) >> 1) | (addr & 0x7fff)
+        return pc
     
     @staticmethod
     def createWorkingFileCopy(origFile: str) -> bytearray:
