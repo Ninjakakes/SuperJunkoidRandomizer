@@ -1,7 +1,11 @@
 import base64
 import enum
 import os
+import pathlib
 from typing import Optional, Union
+
+from src.super_junkoid_randomizer.ips import patch
+
 
 class RomWriterType(enum.IntEnum):
     null = 0
@@ -26,6 +30,7 @@ class RomWriter:
         instance = cls()
         instance.romWriterType = RomWriterType.file
         instance.rom_data = RomWriter.createWorkingFileCopy(origRomPath)
+        instance.patch_if_vanilla()
         return instance
     
     @classmethod
@@ -113,3 +118,14 @@ class RomWriter:
 
     def getBaseFilename(self) -> str:
         return self.baseFilename
+
+    def patch_if_vanilla(self) -> None:
+        if len(self.rom_data) != 4194304:  # subversion rom
+            if len(self.rom_data) == 3145728:  # vanilla SM
+                patch_path = pathlib.Path(__file__).parent.resolve()
+                with open(patch_path.joinpath('subversion.1.2.ips'), 'rb') as file:
+                    patch_data = file.read()
+                self.rom_data = patch(self.rom_data, patch_data)
+                assert len(self.rom_data) == 4194304, f"patch made file {len(self.rom_data)}"
+            else:
+                raise ValueError(f"invalid rom {len(self.rom_data)} - need super junkoid 1.3 or vanilla SM, unheadered")
