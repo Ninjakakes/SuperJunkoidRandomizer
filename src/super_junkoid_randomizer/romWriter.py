@@ -137,7 +137,7 @@ class RomWriter:
         if len(self.rom_data) != 4194304:  # subversion rom
             if len(self.rom_data) == 3145728:  # vanilla SM
                 patch_path = pathlib.Path(__file__).parent.resolve()
-                with open(patch_path.joinpath('subversion.1.2.ips'), 'rb') as file:
+                with open(patch_path.joinpath('Super Junkoid 1.3.ips'), 'rb') as file:
                     patch_data = file.read()
                 self.rom_data = patch(self.rom_data, patch_data)
                 assert len(self.rom_data) == 4194304, f"patch made file {len(self.rom_data)}"
