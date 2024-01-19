@@ -2,6 +2,7 @@ from copy import deepcopy
 from dataclasses import dataclass, asdict
 from typing import Type, Any, cast, Optional
 
+from .defaultLogic import Default
 from .item import all_items
 from .location import Location
 from .logicInterface import LogicInterface
@@ -9,12 +10,13 @@ from .logicInterface import LogicInterface
 @dataclass
 class Game:
     """ a composition of all the components that make up the generated seed """
-    logic: Type[LogicInterface]
+    logic: Optional[Type[LogicInterface]]
     all_locations: dict[str, Location]
     seed: int
     item_placement_spoiler: str = ""
 
     def to_jsonable(self) -> dict[str, Any]:
+        self.logic = None
         dct = asdict(self)
 
         locations_copy = deepcopy(self.all_locations)
@@ -39,4 +41,6 @@ class Game:
             item_name = cast(Optional[str], item)
             if item_name:
                 loc["item"] = all_items[item_name]
+
+        game.logic = Default
         return game
