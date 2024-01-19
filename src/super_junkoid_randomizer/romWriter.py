@@ -4,7 +4,7 @@ import os
 import pathlib
 from typing import Optional, Union
 
-from src.super_junkoid_randomizer.ips import patch
+from .ips import patch
 
 
 class RomWriterType(enum.IntEnum):
