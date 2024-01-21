@@ -13,6 +13,7 @@ class RomWriterType(enum.IntEnum):
     ipsblob = 2
     base64 = 3
 
+
 class RomWriter:
     romWriterType: RomWriterType
     romData: bytearray
@@ -32,7 +33,7 @@ class RomWriter:
         instance.rom_data = RomWriter.createWorkingFileCopy(origRomPath)
         instance.patch_if_vanilla()
         return instance
-    
+
     @classmethod
     def fromBlankIps(cls) -> "RomWriter":
         instance = cls()
@@ -60,14 +61,14 @@ class RomWriter:
         """ converts a SNES lorom address to a PC rom offset """
         pc = ((addr & 0x7f0000) >> 1) | (addr & 0x7fff)
         return pc
-    
+
     @staticmethod
     def createWorkingFileCopy(origFile: str) -> bytearray:
         if not os.path.exists(origFile):
             raise Exception(f'origFile not found: {origFile}')
         with open(origFile, 'rb') as orig:
             return bytearray(orig.read())
-    
+
     @staticmethod
     def isAllRepeatedBytes(data: bytes) -> bool:
         if len(data) < 2:
@@ -76,8 +77,8 @@ class RomWriter:
         for i in range(1, len(data)):
             if data[i] != byte:
                 return False
-        return True    
-    
+        return True
+
     def writeBytes(self, address: int, data: bytes) -> None:
         if self.romWriterType in {RomWriterType.file, RomWriterType.base64}:
             assert len(self.rom_data) >= address + len(data)
@@ -97,14 +98,14 @@ class RomWriter:
                 self.ipsblob.extend(data)
         else:
             raise ValueError(f"invalid rom writer type: {self.romWriterType}")
-        
+
     def writeItem(self, address: int, plmid: bytes, ammoAmount: bytes = b"\x00") -> None:
         if len(plmid) != 2 or len(ammoAmount) != 1:
             raise Exception(f'plmid length ({len(plmid)}) must be 2 and ammoAmount '
                             f'length ({len(ammoAmount)}) must be 1')
         self.writeBytes(address, plmid)
-        self.writeBytes(address+5, ammoAmount)
-    
+        self.writeBytes(address + 5, ammoAmount)
+
     def finalizeRom(self, filename: Optional[str] = None) -> None:
         if self.romWriterType == RomWriterType.file:
             assert filename

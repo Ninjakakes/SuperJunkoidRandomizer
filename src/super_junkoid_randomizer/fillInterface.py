@@ -5,6 +5,7 @@ from .item import Item
 from .loadout import Loadout
 from .location import Location
 
+
 class FillAlgorithm(abc.ABC):
     @abc.abstractmethod
     def __init__(self) -> None:
@@ -22,4 +23,3 @@ class FillAlgorithm(abc.ABC):
     @abc.abstractmethod
     def remove_from_pool(self, item: Item) -> None:
         """ removes this item from the item pool """
-    

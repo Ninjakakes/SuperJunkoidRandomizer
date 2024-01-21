@@ -29,7 +29,8 @@ _progression_items = frozenset([
     Items.MagicSoap
 ])
 
-def solve(game: Game, starting_items: Optional[Loadout] = None) -> tuple[bool,list[str],list[Location]]:
+
+def solve(game: Game, starting_items: Optional[Loadout] = None) -> tuple[bool, list[str], list[Location]]:
     """ returns (completable, spoiler lines, accessible locations) """
     for loc in game.all_locations.values():
         loc["inlogic"] = False
@@ -71,4 +72,4 @@ def solve(game: Game, starting_items: Optional[Loadout] = None) -> tuple[bool,li
         len(unused_locations) == 0,
         log_lines,
         [loc for loc in game.all_locations.values() if loc["roomname"] in used_locations]
-    )    
+    )

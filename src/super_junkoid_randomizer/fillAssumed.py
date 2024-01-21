@@ -15,6 +15,7 @@ _minor_items = {
     Items.LuckyFrog: 3
 }
 
+
 class FillAssumed(FillAlgorithm):
     prog_items: list[Item]
     extra_items: list[Item]
@@ -89,7 +90,7 @@ class FillAssumed(FillAlgorithm):
             return None
 
         return self._choose_location(available_locations), item_to_place
-    
+
     def count_items_remaining(self) -> int:
         return sum(len(li) for li in self.itemLists)
 

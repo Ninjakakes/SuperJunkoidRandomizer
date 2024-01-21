@@ -4,6 +4,7 @@ from .loadout import Loadout
 
 LocationLogicType = dict[str, Callable[[Loadout], bool]]
 
+
 class LogicInterface:
     location_logic: ClassVar[LocationLogicType]
     """

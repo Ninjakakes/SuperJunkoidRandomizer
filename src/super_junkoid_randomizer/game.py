@@ -7,6 +7,7 @@ from .item import all_items
 from .location import Location
 from .logicInterface import LogicInterface
 
+
 @dataclass
 class Game:
     """ a composition of all the components that make up the generated seed """

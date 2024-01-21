@@ -13,6 +13,7 @@ from super_junkoid_randomizer import fillAssumed
 from typing import Union
 from pathlib import Path
 
+
 def plmidFromHiddenness(itemArray, hiddenness) -> bytes:
     if hiddenness == "open":
         plmid = itemArray[1]
@@ -22,19 +23,22 @@ def plmidFromHiddenness(itemArray, hiddenness) -> bytes:
         plmid = itemArray[3]
     return plmid
 
+
 def ips_patch_from_file(ips_file_name: Union[str, Path], input_bytes: Union[bytes, bytearray]) -> bytearray:
-    with open(ips_file_name,"rb") as isp_file:
+    with open(ips_file_name, "rb") as isp_file:
         isp_data = isp_file.read()
     return ips_patch(input_bytes, isp_data)
 
+
 def patch_rom_with_ips(ips_file_name: Union[str, Path], base_rom_file_name: Union[str, Path],
-                        patched_rom_file_name: Union[str,Path]) -> None:
+                       patched_rom_file_name: Union[str, Path]) -> None:
     with open(base_rom_file_name, "rb") as base_rom:
         base_rom_data = base_rom.read()
     patched_rom_data = ips_patch_from_file(ips_file_name, base_rom_data)
 
-    with open(patched_rom_file_name,"wb") as patched_rom:
+    with open(patched_rom_file_name, "wb") as patched_rom:
         patched_rom.write(patched_rom_data)
+
 
 def write_location(romWriter: RomWriter, location: Location) -> None:
     """
@@ -49,10 +53,12 @@ def write_location(romWriter: RomWriter, location: Location) -> None:
     for address in location["altlocationids"]:
         romWriter.writeItem(address, plmid, item[4])
 
+
 def main(argv: list[str]) -> None:
     game = generate()
     rom_name = write_rom(game)
     write_spoiler_file(game, rom_name)
+
 
 def generate() -> Game:
     seed = random.randint(0, 9999999)
@@ -62,7 +68,7 @@ def generate() -> Game:
     csvdict = pullCSV()
     locArray = list(csvdict.values())
 
-    game = Game(Default,csvdict,seed)
+    game = Game(Default, csvdict, seed)
 
     seedComplete = False
     randomizeAttempts = 0
@@ -79,6 +85,7 @@ def generate() -> Game:
         seedComplete = assumed_fill(game)
 
     return game
+
 
 def assumed_fill(game: Game) -> bool:
     for loc in game.all_locations.values():
@@ -109,13 +116,15 @@ def assumed_fill(game: Game) -> bool:
 
     return False
 
+
 def write_rom(game: Game) -> str:
     rom_name = f"SuperJunkoid{game.seed}.sfc"
     rom1_path = f"../roms/{rom_name}"
     rom_clean_path = Path("../roms/Super Junkoid 1.3.sfc")
 
-    if(not rom_clean_path.is_file()):
-        patch_rom_with_ips("super_junkoid_randomizer/Super Junkoid 1.3.ips", "../roms/Super Metroid (JU).sfc", rom_clean_path)
+    if (not rom_clean_path.is_file()):
+        patch_rom_with_ips("super_junkoid_randomizer/Super Junkoid 1.3.ips", "../roms/Super Metroid (JU).sfc",
+                           rom_clean_path)
 
     romWriter = RomWriter.fromFilePath(rom_clean_path)
 
@@ -125,10 +134,11 @@ def write_rom(game: Game) -> str:
     # change values for chozo ball hearts and lucky frog to match the open variant
     romWriter.writeBytes(0x026474, b"\x19")
     romWriter.writeBytes(0x026909, b"\x32")
-        
+
     romWriter.finalizeRom(rom1_path)
 
     return rom_name
+
 
 def get_spoiler(game: Game) -> str:
     """ the text in the spoiler file """
@@ -141,12 +151,13 @@ def get_spoiler(game: Game) -> str:
     s += spoilerSave
     s += "\n\n"
     for loc in game.all_locations.values():
-        s+= f"{loc['index']}: {loc['region']} | {loc['roomname']}: {loc['item'][0]}"+'\n'
-    s+="\n\n"
+        s += f"{loc['index']}: {loc['region']} | {loc['roomname']}: {loc['item'][0]}" + '\n'
+    s += "\n\n"
     for solve_line in play_through:
         s += solve_line + '\n'
 
     return s
+
 
 def write_spoiler_file(game: Game, rom_name: str) -> None:
     text = get_spoiler(game)
@@ -154,9 +165,11 @@ def write_spoiler_file(game: Game, rom_name: str) -> None:
         spoiler_file.write(text)
     print(f"Spoiler file is spoilers/{rom_name}.spoiler.txt")
 
+
 if __name__ == "__main__":
     import time
+
     t0 = time.perf_counter()
     main(sys.argv)
     t1 = time.perf_counter()
-    print(f"Time taken: {t1-t0}")
+    print(f"Time taken: {t1 - t0}")

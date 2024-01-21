@@ -4,6 +4,7 @@ from typing import Optional, TypedDict, cast
 
 from .item import Item
 
+
 class Location(TypedDict):
     index: int
     roomname: str
@@ -13,8 +14,9 @@ class Location(TypedDict):
     locationid: int
     hiddenness: str
     altlocationids: list[int]
-    item:  Optional[Item]
+    item: Optional[Item]
     inlogic: bool
+
 
 def pullCSV() -> dict[str, Location]:
     csvdict: dict[str, Location] = {}

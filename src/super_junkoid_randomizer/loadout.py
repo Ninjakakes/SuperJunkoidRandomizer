@@ -7,10 +7,12 @@ from .logic_shortcut import LogicShortcut
 if TYPE_CHECKING:
     from game import Game
 
+
 class ItemCounter(Counter[Item]):
     def __contains__(self, x: Any) -> bool:
         return self[x] > 0
-    
+
+
 class Loadout:
     contents: ItemCounter
 
@@ -22,15 +24,15 @@ class Loadout:
         if not isinstance(__o, Loadout):
             return False
         return (
-            (self.contents == __o.contents) and
-            (self.game is __o.game)
+                (self.contents == __o.contents) and
+                (self.game is __o.game)
         )
-    
+
     def __contains__(self, x: Union[Item, LogicShortcut]) -> bool:
         if isinstance(x, LogicShortcut):
             return x.access(self)
         return self.contents[x] > 0
-    
+
     def __iter__(self) -> Iterator[Item]:
         for item, count in self.contents.items():
             for _ in range(count):
@@ -56,4 +58,3 @@ class Loadout:
 
     def copy(self) -> "Loadout":
         return Loadout(self.game, self.contents)
-        
