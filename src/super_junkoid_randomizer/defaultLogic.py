@@ -50,7 +50,7 @@ lowerIceCastle = LogicShortcut(lambda loadout: (
 
 crocomire = LogicShortcut(lambda loadout: (
         (lowerIceCastle in loadout) and (canRatBurst in loadout) and (loadout.count(MagicBolt) >= 4) and
-        (Baseball in loadout)
+        (Baseball in loadout) and (IceGem in loadout)
 ))
 
 junkraid = LogicShortcut(lambda loadout: (
