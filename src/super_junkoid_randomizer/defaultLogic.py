@@ -297,7 +297,7 @@ location_logic: LocationLogicType = {
                     (canRatBurst in loadout) or
                     (canRatDash in loadout) and (BloodGem in loadout)
             ) and
-            ((Feather in loadout) and (IceGem in loadout)) or (MagicBroom in loadout)
+            (((Feather in loadout) and (IceGem in loadout)) or (MagicBroom in loadout))
     ),
     "Water Cave Magic Bolt": lambda loadout: (
             (lowerIceCastle in loadout) and (RatCloak in loadout) and
