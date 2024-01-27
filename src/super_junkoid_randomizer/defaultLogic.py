@@ -166,9 +166,8 @@ location_logic: LocationLogicType = {
             ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Wave Bangle": lambda loadout: (  # Deep Purple
-            ((lowerOutskirts in loadout) or (lowerIceCastle in loadout)) and
-            (Baseball in loadout) and
-            ((RatCloak in loadout) or (WaveBangle in loadout))
+            (deepPurple in loadout) and
+            (canRatBurst in loadout)
     ),
     "Left Idol Magic Bolt": lambda loadout: (
             (enterIdol in loadout) and
