@@ -54,7 +54,7 @@ crocomire = LogicShortcut(lambda loadout: (
 ))
 
 junkraid = LogicShortcut(lambda loadout: (
-        (crocomire in loadout) and (loadout.count(Heart) >= 4)
+        (crocomire in loadout) and ((canRatDash in loadout) or (BloodGem in loadout)) and (loadout.count(Heart) >= 4)
 ))
 
 bloodBethel = LogicShortcut(lambda loadout: (
@@ -226,10 +226,11 @@ location_logic: LocationLogicType = {
     "Deep Magic Bolt": lambda loadout: (
             (crateria in loadout) and
             ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
+            and (SanguineFin in loadout) and (canRatDash in loadout)
     ),
     "Fake Map Heart": lambda loadout: (
             (crateria in loadout) and
-            ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
+            ((Feather in loadout) or (SanguineFin in loadout))
     ),
     "Crateria Heart": lambda loadout: (
             (crateria in loadout) and
@@ -288,7 +289,8 @@ location_logic: LocationLogicType = {
     "Crystal Cave Sparksuit": lambda loadout: (
             (Sparksuit in loadout) and
             (lowerIceCastle in loadout) and
-            (RatCloak in loadout)
+            (RatCloak in loadout) and
+            (Feather in loadout)
     ),
     "Frozen Cave Baseball": lambda loadout: (
             (lowerIceCastle in loadout) and (RatCloak in loadout) and
