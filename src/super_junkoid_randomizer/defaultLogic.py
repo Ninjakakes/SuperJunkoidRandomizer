@@ -72,7 +72,7 @@ junkgon = LogicShortcut(lambda loadout: (
 ))
 
 enterIdol = LogicShortcut(lambda loadout: (
-        (junkraid in loadout) or ((junkgon in loadout) and (canRatDash in loadout))
+    ((junkraid in loadout) or ((junkgon in loadout) and (canRatDash in loadout))) and (Sparksuit in loadout)
 ))
 
 sporeSpawn = LogicShortcut(lambda loadout: (
