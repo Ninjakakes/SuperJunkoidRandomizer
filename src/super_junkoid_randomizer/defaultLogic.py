@@ -54,7 +54,7 @@ crocomire = LogicShortcut(lambda loadout: (
 ))
 
 junkraid = LogicShortcut(lambda loadout: (
-        (crocomire in loadout) and ((canRatDash in loadout) or (BloodGem in loadout)) and (loadout.count(Heart) >= 4)
+        (crocomire in loadout) and (canRatDash in loadout) and (loadout.count(Heart) >= 4)
 ))
 
 bloodBethel = LogicShortcut(lambda loadout: (
