@@ -66,7 +66,7 @@ class FillAssumed(FillAlgorithm):
     def _choose_location(locs: list[Location]) -> Location:
         return random.choice(locs)
 
-    def choose_placement(self, availableLocations: list[Location], loadout: Loadout) -> tuple[Location, Item] | None:
+    def choose_placement(self, availableLocations: list[Location], loadout: Loadout) -> Optional[tuple[Location, Item]]:
         from_items = (
             self.prog_items if len(self.prog_items) else (
                 self.extra_items
