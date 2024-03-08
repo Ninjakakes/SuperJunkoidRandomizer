@@ -58,7 +58,12 @@ junkraid = LogicShortcut(lambda loadout: (
 ))
 
 bloodBethel = LogicShortcut(lambda loadout: (
-        (canRatBurst in loadout) and (Feather in loadout)
+        ((canRatBurst in loadout) or
+         (
+                 (lowerOutskirts in loadout) and
+                 (Baseball in loadout) and ((Wallkicks in loadout) or (MagicBroom in loadout))
+         )) and
+        ((Feather in loadout) or ((SanguineFin in loadout) and ((Wallkicks in loadout) or MagicBroom in loadout)))
 ))
 
 botwoon = LogicShortcut(lambda loadout: (
@@ -72,7 +77,7 @@ junkgon = LogicShortcut(lambda loadout: (
 ))
 
 enterIdol = LogicShortcut(lambda loadout: (
-    ((junkraid in loadout) or ((junkgon in loadout) and (canRatDash in loadout))) and (Sparksuit in loadout)
+    ((junkraid in loadout) or (junkgon in loadout)) and (Sparksuit in loadout) and (canRatBurst in loadout)
 ))
 
 sporeSpawn = LogicShortcut(lambda loadout: (
@@ -208,8 +213,7 @@ location_logic: LocationLogicType = {
     ),
     "Toxic Heart": lambda loadout: (
             (crateria in loadout) and
-            (MagicBroom in loadout) and
-            (PurpleLocket in loadout)
+            ((MagicBroom in loadout) or ((Feather in loadout) and (IceGem in loadout)))
     ),
     "Mother Brain Sparksuit": lambda loadout: (
             (canRatBurst in loadout) and (Wallkicks in loadout) and (Feather in loadout)
@@ -244,8 +248,6 @@ location_logic: LocationLogicType = {
     ),
     "Magic Broom": lambda loadout: (
             (crateria in loadout) and
-            (((Feather in loadout) and Wallkicks in loadout) or (MagicBroom in loadout)) and
-            (PurpleLocket in loadout) and
             (loadout.count(Heart) >= 8) and (loadout.count(MagicBolt) >= 5)
     ),
     "Deep Purple Baseball Alter": lambda loadout: (
@@ -284,7 +286,7 @@ location_logic: LocationLogicType = {
             (Baseball in loadout) and
             (lowerIceCastle in loadout) and
             (RatCloak in loadout) and
-            ((Sparksuit in loadout) or (IceGem in loadout) or (MagicBroom in loadout))
+            ((Sparksuit in loadout) or ((IceGem in loadout) and (Feather in loadout)) or (MagicBroom in loadout))
     ),
     "Crystal Cave Sparksuit": lambda loadout: (
             (Sparksuit in loadout) and
@@ -319,8 +321,8 @@ location_logic: LocationLogicType = {
             (crocomire in loadout) and (IceGem in loadout)
     ),
     "Dreamer's Crown": lambda loadout: (
-            (lowerIceCastle in loadout) and (Baseball in loadout) and (Sparksuit in loadout) and (
-                canRatBurst in loadout)
+            (lowerIceCastle in loadout) and (Baseball in loadout) and (Sparksuit in loadout) and
+            (canRatBurst in loadout)
     ),
     "Ice Castle Baseball Alter": lambda loadout: (
             (lowerIceCastle in loadout) and (Baseball in loadout)
@@ -329,7 +331,7 @@ location_logic: LocationLogicType = {
         (junkraid in loadout)
     ),
     "Under Corpses Heart": lambda loadout: (  # Start Of Blood Bethel
-        (bloodBethel in loadout)
+        (bloodBethel in loadout) and (canRatBurst in loadout)
     ),
     "Hidden Magic Bolt": lambda loadout: (
         (bloodBethel in loadout)
@@ -338,14 +340,14 @@ location_logic: LocationLogicType = {
         (bloodBethel in loadout)
     ),
     "Magic Soap": lambda loadout: (
-            (bloodBethel in loadout) and
+            (bloodBethel in loadout) and (canRatBurst in loadout) and
             ((Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Lower Hidden Magic Bolt": lambda loadout: (
         (bloodBethel in loadout)
     ),
     "Behind Blocks Baseball": lambda loadout: (
-            (bloodBethel in loadout) and (BloodGem in loadout)
+            (bloodBethel in loadout) and (BloodGem in loadout) and (canRatBurst in loadout)
     ),
     "Cave Magic Bolt": lambda loadout: (
             (bloodBethel in loadout) and
@@ -366,7 +368,8 @@ location_logic: LocationLogicType = {
         (bloodBethel in loadout)
     ),
     "OatsnGoats Heart": lambda loadout: (
-            (bloodBethel in loadout) and (BloodGem in loadout)
+            (bloodBethel in loadout) and (BloodGem in loadout) and
+            ((SanguineFin in loadout) or ((Wallkicks in loadout) or (MagicBroom in loadout)))
     ),
     "Blood Bethel Baseball Alter": lambda loadout: (
             (bloodBethel in loadout) and (Baseball in loadout)
@@ -379,9 +382,7 @@ location_logic: LocationLogicType = {
             (loadout.count(MagicBolt) >= 15)
     ),
     "Big League Glove": lambda loadout: (
-            (crateria in loadout) and
-            (((Feather in loadout) and Wallkicks in loadout) or (MagicBroom in loadout)) and
-            (PurpleLocket in loadout)
+            (crateria in loadout) and (Feather in loadout)
     )
 }
 
