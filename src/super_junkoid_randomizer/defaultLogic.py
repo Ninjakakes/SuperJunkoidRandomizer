@@ -125,7 +125,7 @@ location_logic: LocationLogicType = {
             (
                     (((BloodGem in loadout) or (IceGem in loadout)) and (RatCloak in loadout))
                     or
-                    ((BloodGem in loadout) or (IceGem in loadout))
+                    ((BloodGem in loadout) and (IceGem in loadout))
             )
     ),
     "Wall Jump Climb Magic Bolt": lambda loadout: (
