@@ -122,7 +122,11 @@ location_logic: LocationLogicType = {
     "Ceiling Baseballs": lambda loadout: (
             (lowerOutskirts in loadout) and
             ((Wallkicks in loadout) or (MagicBroom in loadout)) and
-            ((BloodGem in loadout) or (IceGem in loadout))
+            (
+                    (((BloodGem in loadout) or (IceGem in loadout)) and (RatCloak in loadout))
+                    or
+                    ((BloodGem in loadout) or (IceGem in loadout))
+            )
     ),
     "Wall Jump Climb Magic Bolt": lambda loadout: (
             (lowerOutskirts in loadout) and
@@ -268,7 +272,7 @@ location_logic: LocationLogicType = {
                     (((Feather in loadout) or (Wallkicks in loadout)) and (IceGem in loadout)) or
                     (MagicBroom in loadout)
             ) and
-            (canRatBurst in loadout)
+            (RatCloak in loadout)
     ),
     "Under Shaft Heart": lambda loadout: (
             (canRatBurst in loadout) and ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
@@ -286,7 +290,7 @@ location_logic: LocationLogicType = {
             (Baseball in loadout) and
             (lowerIceCastle in loadout) and
             (RatCloak in loadout) and
-            ((Sparksuit in loadout) or ((IceGem in loadout) and (Feather in loadout)) or (MagicBroom in loadout))
+            (((Sparksuit in loadout) and (canRatBurst in loadout)) or ((IceGem in loadout) and (Feather in loadout)) or (MagicBroom in loadout))
     ),
     "Crystal Cave Sparksuit": lambda loadout: (
             (Sparksuit in loadout) and
@@ -360,8 +364,11 @@ location_logic: LocationLogicType = {
             (bloodBethel in loadout) and (Sparksuit in loadout)
     ),
     "Hidden Table Heart": lambda loadout: (
-            (bloodBethel in loadout) and (SanguineFin in loadout) and
-            ((Wallkicks in loadout) or (MagicBroom in loadout)) and
+            (bloodBethel in loadout) and
+            (
+                    ((SanguineFin in loadout) and ((Wallkicks in loadout) or (MagicBroom in loadout))) or
+                    (Sparksuit in loadout)
+            ) and
             (Baseball in loadout)
     ),
     "Sanguine Fin": lambda loadout: (
