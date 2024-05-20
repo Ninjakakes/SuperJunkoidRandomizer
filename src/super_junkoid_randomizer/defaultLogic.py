@@ -301,7 +301,7 @@ location_logic: LocationLogicType = {
             ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Spike Jump Magic Bolt": lambda loadout: (
-            (canRatBurst in loadout) or
+            ((canRatBurst in loadout) and ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))) or
             ((((Feather in loadout) or (Wallkicks in loadout)) and (IceGem in loadout)) or
              (MagicBroom in loadout)) or (lowerOutskirts in loadout)
     ),
@@ -389,7 +389,7 @@ location_logic: LocationLogicType = {
                     ((SanguineFin in loadout) and ((Wallkicks in loadout) or (MagicBroom in loadout))) or
                     (Sparksuit in loadout)
             ) and
-            (Baseball in loadout)
+            (Baseball in loadout) and (RatCloak in loadout)
     ),
     "Sanguine Fin": lambda loadout: (
         (bloodBethel in loadout)
