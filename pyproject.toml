@@ -9,7 +9,7 @@ authors = [
   { name="ninjakakes" }
 ]
 description = "randomizer for Super Junkoid"
-readme = "readme.md"
+readme = "README.md"
 requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
