@@ -72,7 +72,7 @@ crocomire = LogicShortcut(lambda loadout: (
 ))
 
 junkraid = LogicShortcut(lambda loadout: (
-        (crocomire in loadout) and (canRatDash in loadout) and (loadout.count(Heart) >= 4)
+        (crocomire in loadout) and (canRatDash in loadout) and (loadout.count(Heart) >= 4) and (Sparksuit in loadout)
 ))
 
 bloodBethel = LogicShortcut(lambda loadout: (
@@ -91,7 +91,7 @@ botwoon = LogicShortcut(lambda loadout: (
 ))
 
 junkgon = LogicShortcut(lambda loadout: (
-        (botwoon in loadout) and (BloodGem in loadout) and (loadout.count(MagicBolt) >= 4)
+        (botwoon in loadout) and (BloodGem in loadout) and (loadout.count(MagicBolt) >= 4) and (Sparksuit in loadout)
 ))
 
 enterIdol = LogicShortcut(lambda loadout: (
