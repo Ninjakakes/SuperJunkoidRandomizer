@@ -55,14 +55,14 @@ lowerIceCastle = LogicShortcut(lambda loadout: (
         )
         or
         (
-            ((RatCloak in loadout) and
-             (
-                     (Feather in loadout) or
-                     (Wallkicks in loadout) or
-                     (MagicBroom in loadout)
-             ))
-            and
-            (exitLowerOutskirts in loadout)
+                ((RatCloak in loadout) and
+                 (
+                         (Feather in loadout) or
+                         (Wallkicks in loadout) or
+                         (MagicBroom in loadout)
+                 ))
+                and
+                (exitLowerOutskirts in loadout)
         )
 ))
 
@@ -193,8 +193,7 @@ location_logic: LocationLogicType = {
             ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Wave Bangle": lambda loadout: (  # Deep Purple
-            (deepPurple in loadout) and
-            (canRatBurst in loadout)
+            (deepPurple in loadout)
     ),
     "Left Idol Magic Bolt": lambda loadout: (
             (enterIdol in loadout) and
@@ -238,8 +237,8 @@ location_logic: LocationLogicType = {
             ((MagicBroom in loadout) or ((Feather in loadout) and (IceGem in loadout)))
     ),
     "Mother Brain Sparksuit": lambda loadout: (
-        ((canRatBurst in loadout) and (Wallkicks in loadout) and (Feather in loadout)) or
-        (crateria in loadout)
+            ((canRatBurst in loadout) and (Wallkicks in loadout) and (Feather in loadout)) or
+            (crateria in loadout)
     ),
     "Under Stairs Magic Bolt": lambda loadout: (
             (crateria in loadout) and
@@ -294,14 +293,26 @@ location_logic: LocationLogicType = {
             (RatCloak in loadout)
     ),
     "Under Shaft Heart": lambda loadout: (
-            (canRatBurst in loadout) and ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
+            (
+                    (canRatBurst in loadout) and
+                    ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
+            ) or
+            (
+                    (canRatDash in loadout) and
+                    (
+                            (((Feather in loadout) or (Wallkicks in loadout)) and (IceGem in loadout)) or
+                            (MagicBroom in loadout)
+                    )
+            )
+
     ),
     "Freeze Boost Heart": lambda loadout: (
             ((canRatBurst in loadout) and (canRatDash in loadout) and (IceGem in loadout)) and
             ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Spike Jump Magic Bolt": lambda loadout: (
-            ((canRatBurst in loadout) and ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))) or
+            ((canRatBurst in loadout) and (
+                    (Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))) or
             ((((Feather in loadout) or (Wallkicks in loadout)) and (IceGem in loadout)) or
              (MagicBroom in loadout)) or (lowerOutskirts in loadout)
     ),
