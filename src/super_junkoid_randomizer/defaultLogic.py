@@ -201,7 +201,8 @@ location_logic: LocationLogicType = {
     ),
     "Hidden Shaft Heart": lambda loadout: (
             (sporeSpawn in loadout) and
-            ((RatDasher in loadout) or (Sparksuit in loadout)) and (Feather in loadout)
+            ((RatDasher in loadout) or (Sparksuit in loadout)) and
+            ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Lower Idol Ceiling Magic Bolt": lambda loadout: (
             (sporeSpawn in loadout) and
@@ -343,7 +344,7 @@ location_logic: LocationLogicType = {
                     (canRatBurst in loadout) or
                     (canRatDash in loadout) and (BloodGem in loadout)
             ) and
-            (Feather in loadout) and (SanguineFin in loadout)
+            ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout)) and (SanguineFin in loadout)
     ),
     "Snowmen Mini-Boss Heart": lambda loadout: (
         (lowerIceCastle in loadout)
