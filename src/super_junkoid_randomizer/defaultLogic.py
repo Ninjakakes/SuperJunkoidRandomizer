@@ -66,13 +66,20 @@ lowerIceCastle = LogicShortcut(lambda loadout: (
         )
 ))
 
-crocomire = LogicShortcut(lambda loadout: (
-        (lowerIceCastle in loadout) and (canRatBurst in loadout) and (loadout.count(MagicBolt) >= 4) and
-        (Baseball in loadout) and (IceGem in loadout)
+accessCrocomire = LogicShortcut(lambda loadout: (
+        (lowerIceCastle in loadout) and (canRatBurst in loadout) and (Baseball in loadout) and (IceGem in loadout)
 ))
 
-junkraid = LogicShortcut(lambda loadout: (
-        (crocomire in loadout) and (canRatDash in loadout) and (loadout.count(Heart) >= 4) and (Sparksuit in loadout)
+killCrocomire = LogicShortcut(lambda loadout: (
+        (accessCrocomire in loadout) and (loadout.count(MagicBolt) >= 4)
+))
+
+accessJunkraid = LogicShortcut(lambda loadout: (
+        (accessCrocomire in loadout) and (canRatDash in loadout)
+))
+
+killJunkraid = LogicShortcut(lambda loadout: (
+        (killCrocomire in loadout) and (canRatDash in loadout) and (loadout.count(Heart) >= 4) and (Sparksuit in loadout)
 ))
 
 bloodBethel = LogicShortcut(lambda loadout: (
@@ -90,12 +97,17 @@ botwoon = LogicShortcut(lambda loadout: (
         (Baseball in loadout) and (loadout.count(Heart) >= 8)
 ))
 
-junkgon = LogicShortcut(lambda loadout: (
-        (botwoon in loadout) and (BloodGem in loadout) and (loadout.count(MagicBolt) >= 4) and (Sparksuit in loadout)
+accessJunkgon = LogicShortcut(lambda loadout: (
+        (bloodBethel in loadout) and (BloodGem in loadout) and
+        ((SanguineFin in loadout) or ((Wallkicks in loadout) or (MagicBroom in loadout)))
+))
+
+killJunkgon = LogicShortcut(lambda loadout: (
+        (botwoon in loadout) and (accessJunkgon in loadout) and (loadout.count(MagicBolt) >= 4) and (Sparksuit in loadout)
 ))
 
 enterIdol = LogicShortcut(lambda loadout: (
-        ((junkraid in loadout) or (junkgon in loadout)) and (Sparksuit in loadout) and (canRatBurst in loadout)
+        ((accessJunkraid in loadout) or (accessJunkgon in loadout)) and (Sparksuit in loadout) and (canRatBurst in loadout)
 ))
 
 sporeSpawn = LogicShortcut(lambda loadout: (
@@ -354,7 +366,7 @@ location_logic: LocationLogicType = {
              (MagicBroom in loadout)) and (canRatDash in loadout)
     ),
     "Gem Of Ice": lambda loadout: (
-            (crocomire in loadout) and (IceGem in loadout)
+            (killCrocomire in loadout) and (IceGem in loadout)
     ),
     "Dreamer's Crown": lambda loadout: (
             (lowerIceCastle in loadout) and (Baseball in loadout) and (Sparksuit in loadout) and
@@ -364,7 +376,7 @@ location_logic: LocationLogicType = {
             (lowerIceCastle in loadout) and (Baseball in loadout)
     ),
     "Junkraid Lucky Frog": lambda loadout: (
-        (junkraid in loadout)
+        (killJunkraid in loadout)
     ),
     "Under Corpses Heart": lambda loadout: (  # Start Of Blood Bethel
             (bloodBethel in loadout) and (canRatBurst in loadout)
@@ -414,10 +426,10 @@ location_logic: LocationLogicType = {
             (bloodBethel in loadout) and (Baseball in loadout)
     ),
     "Junkgon Lucky Frog": lambda loadout: (
-        (junkgon in loadout)
+        (killJunkgon in loadout)
     ),
     "Gem Of Death": lambda loadout: (  # SHEOL
-            (junkraid in loadout) and (junkgon in loadout) and (junkoon in loadout) and (junkly in loadout) and
+            (killJunkraid in loadout) and (killJunkgon in loadout) and (junkoon in loadout) and (junkly in loadout) and
             (loadout.count(MagicBolt) >= 15)
     ),
     "Big League Glove": lambda loadout: (
