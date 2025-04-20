@@ -89,6 +89,8 @@ bloodBethel = LogicShortcut(lambda loadout: (
                  (Baseball in loadout) and ((Wallkicks in loadout) or (MagicBroom in loadout))
          )) and
         ((Feather in loadout) or ((SanguineFin in loadout) and ((Wallkicks in loadout) or MagicBroom in loadout)))
+        and
+        ((SanguineFin in loadout) or (RatCloak in loadout) or (BloodGem in loadout) or (Sparksuit in loadout))
 ))
 
 botwoon = LogicShortcut(lambda loadout: (
@@ -362,7 +364,7 @@ location_logic: LocationLogicType = {
         (lowerIceCastle in loadout)
     ),
     "Rat Dasher": lambda loadout: (
-            ((((Feather in loadout) or (Wallkicks in loadout)) and (IceGem in loadout)) or
+            (((Feather in loadout) and (IceGem in loadout)) or
              (MagicBroom in loadout)) and (canRatDash in loadout)
     ),
     "Gem Of Ice": lambda loadout: (
