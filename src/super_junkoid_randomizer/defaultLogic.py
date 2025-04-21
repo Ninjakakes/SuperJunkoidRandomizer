@@ -129,11 +129,11 @@ deepPurple = LogicShortcut(lambda loadout: (
 ))
 
 crateria = LogicShortcut(lambda loadout: (
-        (deepPurple in loadout) and (canRatBurst in loadout) and (Sparksuit in loadout)
+        (deepPurple in loadout) and (Sparksuit in loadout)
 ))
 
 junkly = LogicShortcut(lambda loadout: (
-        (crateria in loadout) and
+        (crateria in loadout) and (canRatBurst in loadout) and
         (((Feather in loadout) and Wallkicks in loadout) or (MagicBroom in loadout)) and
         (PurpleLocket in loadout) and
         (loadout.count(Heart) >= 12) and (loadout.count(MagicBolt) >= 9) and (loadout.count(Baseball) >= 5)
@@ -256,12 +256,12 @@ location_logic: LocationLogicType = {
             (crateria in loadout)
     ),
     "Under Stairs Magic Bolt": lambda loadout: (
-            (crateria in loadout) and
+            (crateria in loadout) and (canRatBurst in loadout) and
             (((Feather in loadout) and Wallkicks in loadout) or (MagicBroom in loadout)) and
             (PurpleLocket in loadout)
     ),
     "Water Climb Heart": lambda loadout: (
-            (crateria in loadout) and
+            (crateria in loadout) and (canRatBurst in loadout) and
             ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Deep Magic Bolt": lambda loadout: (
@@ -275,25 +275,26 @@ location_logic: LocationLogicType = {
     ),
     "Crateria Heart": lambda loadout: (
             (crateria in loadout) and
+            (canRatBurst in loadout) and
             ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Gem Of Storms": lambda loadout: (
-            (crateria in loadout) and
+            (crateria in loadout) and (canRatBurst in loadout) and
             ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout)) and
             (StormsGem in loadout) and
             (loadout.count(Heart) >= 8) and (loadout.count(Heart) >= 5)
     ),
     "Magic Broom": lambda loadout: (
-            (crateria in loadout) and
+            (crateria in loadout) and (canRatBurst in loadout) and
             (loadout.count(Heart) >= 8) and (loadout.count(MagicBolt) >= 5)
     ),
     "Deep Purple Baseball Alter": lambda loadout: (
-            (crateria in loadout) and
+            (crateria in loadout) and (canRatBurst in loadout) and
             (((Feather in loadout) and Wallkicks in loadout) or (MagicBroom in loadout)) and
             (PurpleLocket in loadout)
     ),
     "Lava Magic Bolt": lambda loadout: (
-            (crateria in loadout) and
+            (crateria in loadout) and (canRatBurst in loadout) and
             (((Feather in loadout) and Wallkicks in loadout) or (MagicBroom in loadout)) and
             (PurpleLocket in loadout)
     ),
@@ -435,7 +436,7 @@ location_logic: LocationLogicType = {
             (loadout.count(MagicBolt) >= 15)
     ),
     "Big League Glove": lambda loadout: (
-            (crateria in loadout) and (Feather in loadout)
+            (crateria in loadout) and (canRatBurst in loadout) and (Feather in loadout)
     )
 }
 
