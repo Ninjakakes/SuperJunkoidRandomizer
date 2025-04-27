@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "super_junkoid_randomizer"
-version = "0.1.6"
+version = "0.1.8"
 authors = [
   { name="ninjakakes" }
 ]

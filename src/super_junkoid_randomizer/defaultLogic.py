@@ -40,12 +40,9 @@ lowerOutskirts = LogicShortcut(lambda loadout: (
 ))
 
 lowerIceCastle = LogicShortcut(lambda loadout: (
+        (MagicBroom in loadout) or
         (
-                (
                         ((Feather in loadout) or (Wallkicks in loadout)) and (IceGem in loadout)
-                )
-                or
-                (MagicBroom in loadout)
         )
         or
         (
@@ -75,11 +72,12 @@ killCrocomire = LogicShortcut(lambda loadout: (
 ))
 
 accessJunkraid = LogicShortcut(lambda loadout: (
-        (accessCrocomire in loadout) and (canRatDash in loadout)
+        (lowerIceCastle in loadout) and (canRatBurst in loadout) and (canRatDash in loadout)
 ))
 
 killJunkraid = LogicShortcut(lambda loadout: (
-        (killCrocomire in loadout) and (canRatDash in loadout) and (loadout.count(Heart) >= 4) and (Sparksuit in loadout)
+        (killCrocomire in loadout) and ((accessJunkraid in loadout) or (enterIdolBlood in loadout)) and
+        (loadout.count(Heart) >= 4) and (Sparksuit in loadout)
 ))
 
 bloodBethel = LogicShortcut(lambda loadout: (
@@ -96,7 +94,7 @@ bloodBethel = LogicShortcut(lambda loadout: (
 botwoon = LogicShortcut(lambda loadout: (
         (bloodBethel in loadout) and (SanguineFin in loadout) and
         ((Wallkicks in loadout) or (MagicBroom in loadout)) and
-        (Baseball in loadout) and (loadout.count(Heart) >= 8)
+        (Baseball in loadout) and (loadout.count(Heart) >= 4)
 ))
 
 accessJunkgon = LogicShortcut(lambda loadout: (
@@ -105,11 +103,21 @@ accessJunkgon = LogicShortcut(lambda loadout: (
 ))
 
 killJunkgon = LogicShortcut(lambda loadout: (
-        (botwoon in loadout) and (accessJunkgon in loadout) and (loadout.count(MagicBolt) >= 4) and (Sparksuit in loadout)
+        (botwoon in loadout) and
+        ((accessJunkgon in loadout) or enterIdolIce in loadout) and
+        (loadout.count(MagicBolt) >= 4) and (Sparksuit in loadout)
+))
+
+enterIdolBlood = LogicShortcut(lambda loadout: (
+    (accessJunkgon in loadout) and (Sparksuit in loadout) and (canRatBurst in loadout)
+))
+
+enterIdolIce = LogicShortcut(lambda loadout: (
+    (accessJunkraid in loadout) and (Sparksuit in loadout) and (canRatBurst in loadout)
 ))
 
 enterIdol = LogicShortcut(lambda loadout: (
-        ((accessJunkraid in loadout) or (accessJunkgon in loadout)) and (Sparksuit in loadout) and (canRatBurst in loadout)
+    (enterIdolIce in loadout) or (enterIdolBlood in loadout)
 ))
 
 sporeSpawn = LogicShortcut(lambda loadout: (
@@ -422,8 +430,9 @@ location_logic: LocationLogicType = {
         (bloodBethel in loadout)
     ),
     "OatsnGoats Heart": lambda loadout: (
-            (bloodBethel in loadout) and (BloodGem in loadout) and
-            ((SanguineFin in loadout) or ((Wallkicks in loadout) or (MagicBroom in loadout)))
+            ((bloodBethel in loadout) and (BloodGem in loadout) and
+            ((SanguineFin in loadout) or ((Wallkicks in loadout) or (MagicBroom in loadout)))) or
+            (enterIdolIce in loadout)
     ),
     "Blood Bethel Baseball Alter": lambda loadout: (
             (bloodBethel in loadout) and (Baseball in loadout)
