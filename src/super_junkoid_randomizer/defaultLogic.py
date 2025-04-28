@@ -32,7 +32,12 @@ enterLowerOutskirts = LogicShortcut(lambda loadout: (
 
 exitLowerOutskirts = LogicShortcut(lambda loadout: (
         (canRatBurst in loadout) or
-        ((Baseball in loadout) and ((Wallkicks in loadout) or (MagicBroom in loadout)))
+        (
+                (Baseball in loadout) and
+                ((Wallkicks in loadout) or
+                 (MagicBroom in loadout) or
+                 ((Feather in loadout) and (IceGem in loadout)))
+        )
 ))
 
 lowerOutskirts = LogicShortcut(lambda loadout: (
@@ -42,7 +47,7 @@ lowerOutskirts = LogicShortcut(lambda loadout: (
 lowerIceCastle = LogicShortcut(lambda loadout: (
         (MagicBroom in loadout) or
         (
-                        ((Feather in loadout) or (Wallkicks in loadout)) and (IceGem in loadout)
+                ((Feather in loadout) or (Wallkicks in loadout)) and (IceGem in loadout)
         )
         or
         (
@@ -109,15 +114,15 @@ killJunkgon = LogicShortcut(lambda loadout: (
 ))
 
 enterIdolBlood = LogicShortcut(lambda loadout: (
-    (accessJunkgon in loadout) and (Sparksuit in loadout) and (canRatBurst in loadout)
+        (accessJunkgon in loadout) and (Sparksuit in loadout) and (canRatBurst in loadout)
 ))
 
 enterIdolIce = LogicShortcut(lambda loadout: (
-    (accessJunkraid in loadout) and (Sparksuit in loadout) and (canRatBurst in loadout)
+        (accessJunkraid in loadout) and (Sparksuit in loadout) and (canRatBurst in loadout)
 ))
 
 enterIdol = LogicShortcut(lambda loadout: (
-    (enterIdolIce in loadout) or (enterIdolBlood in loadout)
+        (enterIdolIce in loadout) or (enterIdolBlood in loadout)
 ))
 
 sporeSpawn = LogicShortcut(lambda loadout: (
@@ -156,8 +161,10 @@ location_logic: LocationLogicType = {
         True
     ),
     "Pipe Maze Heart": lambda loadout: (
-            (RatCloak in loadout) and
-            ((Feather in loadout) or (Wallkicks in loadout) or (MagicBroom in loadout))
+            (MagicBroom in loadout) or
+            (((RatCloak in loadout) or Sparksuit in loadout) and
+             ((Feather in loadout) or (Wallkicks in loadout))) or
+            ((Wallkicks in loadout) and (SanguineFin in loadout))
     ),
     "Ceiling Baseballs": lambda loadout: (
             (lowerOutskirts in loadout) and
@@ -196,7 +203,7 @@ location_logic: LocationLogicType = {
     ),
     "Rat Burst": lambda loadout: (
             (lowerOutskirts in loadout) and
-            (canRatBurst in loadout)
+            ((canRatBurst in loadout) or ((Wallkicks in loadout) and (RatCloak in loadout)))
     ),
     "Outside Idol Sparksuit": lambda loadout: (
             (lowerOutskirts in loadout) and
@@ -431,7 +438,7 @@ location_logic: LocationLogicType = {
     ),
     "OatsnGoats Heart": lambda loadout: (
             ((bloodBethel in loadout) and (BloodGem in loadout) and
-            ((SanguineFin in loadout) or ((Wallkicks in loadout) or (MagicBroom in loadout)))) or
+             ((SanguineFin in loadout) or ((Wallkicks in loadout) or (MagicBroom in loadout)))) or
             (enterIdolIce in loadout)
     ),
     "Blood Bethel Baseball Alter": lambda loadout: (
