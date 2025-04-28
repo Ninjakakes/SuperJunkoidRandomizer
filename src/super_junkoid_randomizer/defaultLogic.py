@@ -256,12 +256,12 @@ location_logic: LocationLogicType = {
             ((Wallkicks in loadout) or (MagicBroom in loadout))
     ),
     "Toxic Heart": lambda loadout: (
-            (crateria in loadout) and
+            (crateria in loadout) and (RatCloak in loadout) and
             ((MagicBroom in loadout) or ((Feather in loadout) and (IceGem in loadout)))
     ),
     "Mother Brain Sparksuit": lambda loadout: (
             ((canRatBurst in loadout) and (Wallkicks in loadout) and (Feather in loadout)) or
-            (crateria in loadout)
+            ((crateria in loadout) and (canRatBurst in loadout))
     ),
     "Under Stairs Magic Bolt": lambda loadout: (
             (crateria in loadout) and (canRatBurst in loadout) and
