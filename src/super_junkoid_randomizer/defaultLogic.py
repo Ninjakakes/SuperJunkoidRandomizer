@@ -285,7 +285,7 @@ location_logic: LocationLogicType = {
             and (SanguineFin in loadout) and (canRatDash in loadout)
     ),
     "Fake Map Heart": lambda loadout: (
-            (crateria in loadout) and
+            (crateria in loadout) and (RatCloak in loadout) and
             ((Feather in loadout) or (SanguineFin in loadout))
     ),
     "Crateria Heart": lambda loadout: (
